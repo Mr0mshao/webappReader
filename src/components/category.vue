@@ -84,8 +84,8 @@ export default {
     return {
     	list2:[],
     	list3:[],
-    	demo2:'美食',
-    	demo3:'美食',
+    	demo2:'玄幻奇幻',
+    	demo3:'历史军事',
     	index:0,
     	index2:0,
     }
