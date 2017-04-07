@@ -6,7 +6,7 @@
         :right-options="{showMore:false}"
         style="background-color:#000;"
       >
-        {{title}}
+        {{pageTitle}}
         <a slot="right" v-show="DONE_ISLOGIN ? false : true" @click="showReginster= true">注册</a>
         <a slot="right" v-show="DONE_ISLOGIN ? false : true" @click="showXdialog = true">登录</a>
         <span slot="right" v-show="DONE_ISLOGIN ? true : false" style="font-size:12px;">
@@ -21,19 +21,17 @@
             <group>
               <x-input 
               title="账 户：" 
-              name="loginUsername" 
               placeholder="请输入账户" 
               type="text"
-              ref="usr"
-              required
+              v-model="loginInfo.username"
+              :required="true"
               ></x-input>
               <x-input 
               title="密 码：" 
-              name="loginPassword" 
               placeholder="请输入密码" 
               type="password"
-              ref="pwd"
-              required
+              v-model="loginInfo.password"
+              :required="true"
               ></x-input>
             </group>
           </div>
@@ -49,29 +47,41 @@
           <div class="dialog-content">
             <group>
               <x-input 
-                title="账 户：" 
-                name="loginUsername" 
                 placeholder="请输入账户" 
                 type="text"
-                ref="regUsr"
-                required
-              ></x-input>
+                is-type="validElement"
+                v-model="registerInfo.username"
+                :required="true"
+              >
+<img slot="label" style="padding-right:10px;display:block;" src="../assets/user.png" width="24" height="24">
+              </x-input>
+              <x-input 
+                title="邮 箱：" 
+                placeholder="请输入邮箱" 
+                type="text"
+                is-type="email"
+                v-model="registerInfo.email"
+                :required="true"
+              >
+<img slot="label" style="padding-right:10px;display:block;" src="../assets/email.png" width="24" height="24">
+              </x-input>
               <x-input 
                 title="密 码：" 
-                name="loginPassword" 
-                placeholder="请输入密码" 
                 type="password"
-                ref="regPwd"
-                required
-              ></x-input>
+                v-model="registerInfo.password"
+                :required="true"
+              >
+<img slot="label" style="padding-right:10px;display:block;" src="../assets/pwd.png" width="24" height="24">
+              </x-input>
               <x-input 
                 title="确认密码：" 
-                name="confirPassword" 
-                placeholder="请输入确认密码：" 
                 type="password"
-                ref="confirPwd"
-                required
-              ></x-input>
+                :required="true"
+                v-model="registerInfo.confirPassword"
+                :equal-with="registerInfo.password"
+              >
+<img slot="label" style="padding-right:10px;display:block;" src="../assets/confirpwd.png" width="24" height="24">
+              </x-input>
             </group>
           </div>
           <div class="btn">
@@ -80,58 +90,83 @@
           </div>
         </x-dialog>
       </div>
+      <div v-transfer-dom>
+        <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-show="onShow" @on-hide="onHide">{{DONE_ISLOGIN ? '成功': '失败'}}</alert>
+      </div>
     </div>
 </template>
 
 <script>
-import { XHeader,XDialog,XInput, Group,TransferDomDirective as TransferDom } from 'vux'
+import { XHeader,XDialog,XInput,Alert,Group,TransferDomDirective as TransferDom } from 'vux'
 import { mapGetters } from 'vuex'
 export default {
   directives: { TransferDom },
-  components: { XHeader,XDialog,XInput, Group },
+  components: { XHeader,XDialog,XInput, Group,Alert  },
   props:['isShowBack'],
   data () {
     return {
-      loginInfo:{},
+      loginInfo:{
+        username:'',
+        password:''
+      },
+      registerInfo:{
+        username:'',
+        email:'',
+        password:'',
+        confirPassword:'',
+      },
       showReginster:false,
       showXdialog:false,
-      title:'我的书城',
+      pageTitle:'我的书城',
+      alertTitle:'',
+      validElement: function(value){
+        return {
+          vaild : value==='2333',
+          msg: 'Must be 2333'
+        }
+      },
     }
   },
   computed:{
-    ...mapGetters(['DONE_USERINFO','DONE_ISLOGIN'])
+    ...mapGetters(['DONE_USERINFO','DONE_ISLOGIN','DONE_ALERTSHOW'])
   },
   methods:{
     getValue(){
-      this.loginInfo.loginUsername = this.$refs.usr.currentValue
-      this.loginInfo.loginPassword = this.$refs.pwd.currentValue
+      this.alertTitle = '登录'
       console.log(this.loginInfo);
 
       this.showXdialog = false;
-      this.login()
+      this.login(this.loginInfo)
     },
     getRegValue(){
-      this.loginInfo.loginUsername = this.$refs.regUsr.currentValue
-      this.loginInfo.loginPassword = this.$refs.regPwd.currentValue
-      this.loginInfo.loginPassword = this.$refs.confirPwd.currentValue
-      console.log(this.loginInfo);
+      this.alertTitle = '注册'
+      console.log(this.registerInfo);
 
-      this.showXdialog = false;
+      this.showReginster = false;
+      this.register(this.registerInfo)
     },
-    login(){
-      this.$store.dispatch('FETCH_LOGIN')
+    login(params){
+      this.$store.dispatch('FETCH_LOGIN',params)
+    },
+    register(params){
+      this.$store.dispatch('FETCH_REGISTER',params)
     },
     logout(){
       console.log('注销')
       this.$store.dispatch('FETCH_LOGOUT')
-    }
+    },
+    onHide () {
+      console.log('on hide')
+    },
+    onShow () {
+      console.log('on show')
+    },
   },
 }
 </script>
 <style>
 .weui-dialog{
   border-radius: 8px;
-  padding-bottom: 8px;
 }
 .dialog-title {
   line-height: 30px;
@@ -140,13 +175,13 @@ export default {
 .dialog-content{
   height: 200px;
   overflow: hidden;
-  background-color: #eee;
+  
   position: relative;
 }
 .dialog-btn {
   display: inline-block;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   width: 48%;
 }
 .dialog-confir{
@@ -163,6 +198,9 @@ export default {
   display: block;
   font-size: 13px;
   color:#555;
+}
+.btn{
+  border-top: 1px solid #ddd
 }
 </style>
 
