@@ -11,6 +11,7 @@ const actions = {
 	[types.FETCH_RANK_LIST]({commit},params){
 		commit(types.TOGGLE_START_LOADING)
 		commit(types.TOGGLE_ISSHOWBACK_Y)
+		commit(types.TOGGLE_PAGETITLE, '排行')
 		const data = {username:"王五",password:"123456"}
 		setTimeout(()=>{
 			commit(types.TOGGLE_RANK_LIST, data)

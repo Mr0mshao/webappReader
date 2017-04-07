@@ -6,7 +6,7 @@
         :right-options="{showMore:false}"
         style="background-color:#000;"
       >
-        {{pageTitle}}
+        {{DONE_PAGETITLE ? DONE_PAGETITLE : pageTitle}}
         <a slot="right" v-show="DONE_ISLOGIN ? false : true" @click="showReginster= true">注册</a>
         <a slot="right" v-show="DONE_ISLOGIN ? false : true" @click="showXdialog = true">登录</a>
         <span slot="right" v-show="DONE_ISLOGIN ? true : false" style="font-size:12px;">
@@ -117,7 +117,7 @@ export default {
       },
       showReginster:false,
       showXdialog:false,
-      pageTitle:'我的书城',
+      pageTitle: '我的书城',
       alertTitle:'',
       validElement: function(value){
         return {
@@ -128,7 +128,7 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['DONE_USERINFO','DONE_ISLOGIN','DONE_ALERTSHOW'])
+    ...mapGetters(['DONE_USERINFO','DONE_ISLOGIN','DONE_ALERTSHOW','DONE_PAGETITLE'])
   },
   methods:{
     getValue(){

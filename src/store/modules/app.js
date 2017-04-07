@@ -8,7 +8,7 @@ const state = {
 	userInfo: window.localStorage.getItem('user') || {},
 	registerState:false,
 	alertShow:false,
-	pageTitle:'',
+	pageTitle:'我的书城',
 }
 const getters = {
 	[types.DONE_LOADING]:state => state.loading,
@@ -81,9 +81,6 @@ const mutations = {
 	},
 	[types.TOGGLE_ALERTSHOW_Y](stata){
 		state.alertShow = true
-	},
-	[types.TOGGLE_ALERTSHOW_N](stata){
-		state.alertShow = false
 	},
 	[types.TOGGLE_PAGETITLE](stata, str){
 		state.alertShow = false

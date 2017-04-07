@@ -31,6 +31,7 @@ export const TOGGLE_CHANNEL_LIST = 'TOGGLE_CHANNEL_LIST'              // 频道
 
 //  getters types
 export const DONE_LOADING = 'DONE_LOADING'                  // loading
+export const DONE_PAGETITLE = 'DONE_PAGETITLE'                  // 页面标题
 export const DONE_REGISTER_STATE = 'DONE_REGISTER_STATE'                // 注册状态，失败，成功
 export const DONE_ALERTSHOW = 'DONE_ALERTSHOW'                  // 消息提示框状态
 export const DONE_ISSHOWBACK = 'DONE_ISSHOWBACK'            // 返回ICON显示状态

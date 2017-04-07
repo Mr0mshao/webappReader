@@ -11,6 +11,7 @@ const actions = {
 	[types.FETCH_HOME_LIST]({commit},params){
 		commit(types.TOGGLE_START_LOADING)
 		commit(types.TOGGLE_ISSHOWBACK_N)
+		commit(types.TOGGLE_PAGETITLE, '我的书城')
 		const data = {username:"王五",password:"123456"}
 		setTimeout(()=>{
 			commit(types.TOGGLE_HOME_LIST, data)
