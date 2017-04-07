@@ -13,9 +13,9 @@
 			<div class="box1">
 		        <div class="box1-item" v-for="i in 7">
 		        	<router-link to="/rank" class="routerlink">
-		        		<img src="../assets/150.jpg" height="200" width="150">
-		        		<figcaption>xxxx</figcaption>
-		        		<p> 一梦黄粱 </p>
+		        		<img src="../assets/150.jpg" class="slide-img">
+		        		<figcaption class="slide-caption">xxxx</figcaption>
+		        		<p class="slide-author"> 一梦黄粱 </p>
 		        	</router-link>
 		        </div>
 	      	</div>

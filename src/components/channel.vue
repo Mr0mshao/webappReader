@@ -178,7 +178,7 @@ ol{
 	color: #f60;
 }
 .book-layout{
-	  position: relative;
+	position: relative;
     display: block;
     overflow: hidden;
     padding: 16px;
@@ -186,7 +186,7 @@ ol{
     transition: padding-left .15s;
 }
 .book-cover{
-	  font-size: 0;
+	font-size: 0;
     float: left;
     width: 4.125rem;
     height: 5.5rem;
@@ -203,7 +203,7 @@ ol{
     text-overflow: ellipsis;
 }
 .book-desc{
-	  line-height: 1.1875rem;
+	line-height: 1.1875rem;
     display: -webkit-box;
     height: 2.25rem;
     -webkit-box-orient: vertical;
