@@ -11,13 +11,15 @@ const actions = {
 	[types.FETCH_CATEGORY_LIST]({commit},params){
 		commit(types.TOGGLE_START_LOADING)
 		commit(types.TOGGLE_ISSHOWBACK_Y)
-    commit(types.TOGGLE_PAGETITLE, '分类')
+    	commit(types.TOGGLE_PAGETITLE, '分类')
 		
 		const data = {username:"王五",password:"123456"}
-		setTimeout(()=>{
-			commit(types.TOGGLE_CATEGORY_LIST, data)
+		const data2 = axios.get('http://localhost/reader/index.php',{
+			headers: {'Content-Type':'application/x-www-form-urlencoded'}
+		}).then((res)=>{
+			commit(types.TOGGLE_CATEGORY_LIST, res.data)
 			commit(types.TOGGLE_FINISH_LOADING)
-		},2000)
+		});
 	}
 }
 

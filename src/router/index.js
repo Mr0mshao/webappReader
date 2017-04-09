@@ -42,7 +42,7 @@ export default new Router({
     	name:'category',
     	component: Category
     },{
-    	path:'/book',
+    	path:'/book/:id',
     	name:'book',
     	component: Books
     },

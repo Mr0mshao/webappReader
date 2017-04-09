@@ -5,14 +5,14 @@
 		<i>| </i>
 		<h3>分类</h3>
 		<span class="more">
-			<router-link to="/category">
+			<router-link to="/category" >
 				更多>
 			</router-link>
 		</span>
 	</div>
 	<div>
 		<div>
-			<tab :line-width=2 active-color='#f60' v-model="index">
+			<tab :line-width=1 active-color='#f60' v-model="index">
 				<tab-item 
 					class="vux-center" 
 					:selected="demo2 === item" 
@@ -36,7 +36,7 @@
 			</swiper>
 		</div>
 		<div>
-			<tab :line-width=2 active-color='#f60' v-model="index2">
+			<tab :line-width=1 active-color='#f60' v-model="index2">
 				<tab-item 
 					class="vux-center" 
 					:selected="demo3 === item" 

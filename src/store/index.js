@@ -5,6 +5,7 @@ import home from './modules/home.js'
 import rank from './modules/rank.js'
 import category from './modules/category.js'
 import channel from './modules/channel.js'
+import book from './modules/book.js'
 
 
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
 		home,
 		rank,
 		category,
-		channel
+		channel,
+		book
 	},
 })

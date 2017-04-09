@@ -11,6 +11,7 @@ export const FETCH_HOME_LIST = 'FETCH_HOME_LIST'                // 获取主页�
 export const FETCH_RANK_LIST = 'FETCH_RANK_LIST'                // 获取排行
 export const FETCH_CATEGORY_LIST = 'FETCH_CATEGORY_LIST'        // 获取分类
 export const FETCH_CHANNEL_LIST = 'FETCH_CHANNEL_LIST'          // 获取频道
+export const FETCH_BOOK_DETAIL = 'FETCH_BOOK_DETAIL'            // 获取书籍
 
 // mutations types
 export const TOGGLE_PAGETITLE = 'TOGGLE_PAGETITLE'              // 页面标题
@@ -28,6 +29,7 @@ export const TOGGLE_HOME_LIST = 'TOGGLE_HOME_LIST'              // 主页
 export const TOGGLE_RANK_LIST = 'TOGGLE_RANK_LIST'              // 排行
 export const TOGGLE_CATEGORY_LIST = 'TOGGLE_CATEGORY_LIST'              // 分类
 export const TOGGLE_CHANNEL_LIST = 'TOGGLE_CHANNEL_LIST'              // 频道
+export const TOGGLE_BOOK_DETAIL = 'TOGGLE_BOOK_DETAIL'              // 书籍
 
 //  getters types
 export const DONE_LOADING = 'DONE_LOADING'                  // loading
@@ -42,4 +44,5 @@ export const DONE_HOME_LIST = 'DONE_HOME_LIST'        // 主页
 export const DONE_RANK_LIST = 'DONE_RANK_LIST'        // 排行
 export const DONE_CATEGORY_LIST = 'DONE_CATEGORY_LIST'        // 分类
 export const DONE_CHANNEL_LIST = 'DONE_CHANNEL_LIST'        // 频道
+export const DONE_BOOK_DETAIL = 'DONE_BOOK_DETAIL'        // 书籍
 

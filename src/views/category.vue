@@ -1,14 +1,15 @@
 <template>    
 <div>
-	category
+  <layout-list :datalist="DONE_CATEGORY_LIST.hot"></layout-list>
 </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import layoutList from '../components/list.vue'
 export default {
   name:'category',
-  components: {},
+  components: { layoutList },
   data () {
     return {}
   },
