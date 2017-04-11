@@ -13,10 +13,12 @@ const actions = {
 		commit(types.TOGGLE_ISSHOWBACK_N)
 		commit(types.TOGGLE_PAGETITLE, '我的书城')
 		const data = {username:"王五",password:"123456"}
-		setTimeout(()=>{
-			commit(types.TOGGLE_HOME_LIST, data)
+		axios.get('http://localhost:80/reader-api/v1/home',{
+			headers: {'Content-Type':'application/json'}
+		}).then((res)=>{
+			commit(types.TOGGLE_HOME_LIST, res.data)
 			commit(types.TOGGLE_FINISH_LOADING)
-		},2000)
+		})
 	}
 }
 

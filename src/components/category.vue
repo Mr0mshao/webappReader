@@ -1,12 +1,11 @@
 <template>    
 <div>
 
-	<div class="home_title rank">
-		<i>| </i>
-		<h3>分类</h3>
+	<div class="home_title">
+		<h3 class="module-title">分类</h3>
 		<span class="more">
-			<router-link to="/category" >
-				更多>
+			<router-link to="/category" class="module-header-btn">
+				更多 >
 			</router-link>
 		</span>
 	</div>
@@ -23,13 +22,13 @@
 				{{item.name}}
 				</tab-item>
 			</tab>
-			<swiper v-model="index" height="150px" :show-dots="false">
+			<swiper v-model="index" height="168px" :show-dots="false">
 				<swiper-item v-for="(item, index) in list2" :key="index">
 					<div  v-for="(i, idx) in item.data" class="cate-box">
 						<router-link to="/rank">
 							<img src="../assets/150.jpg" style="width: 66px;height88px;">
-	        		<figcaption>{{i}}</figcaption>
-	        		<p> 一梦黄粱 </p>
+			        		<figcaption class="slide-caption">{{i}}</figcaption>
+			        		<p class="slide-author"> 一梦黄粱 </p>
 						</router-link>
 					</div>
 				</swiper-item>
@@ -47,13 +46,13 @@
 				{{item.name}}
 				</tab-item>
 			</tab>
-			<swiper v-model="index2" height="150px" :show-dots="false">
+			<swiper v-model="index2" height="168px" :show-dots="false">
 				<swiper-item v-for="(item, index) in list3" :key="index">
 					<div  v-for="(i, idx) in item.data" class="cate-box">
 						<router-link to="/rank">
 							<img src="../assets/150.jpg" style="width: 66px;height88px;">
-	        		<figcaption>{{i}}</figcaption>
-	        		<p> 一梦黄粱 </p>
+			        		<figcaption class="slide-caption">{{i}}</figcaption>
+			        		<p class="slide-author"> 一梦黄粱 </p>
 						</router-link>
 					</div>
 				</swiper-item>
@@ -69,10 +68,10 @@ import { Tab,TabItem,Swiper, SwiperItem } from 'vux'
 const list = () => [
 {'name':'玄幻奇幻','data':['玄幻奇幻', '武侠仙侠', '都市职场']},
 {'name':'武侠仙侠','data':['玄幻奇幻', '武侠仙侠', '都市职场']},
-{'name':"都市职场",'data':['玄幻奇幻', '武侠仙侠', '都市职场']}
+{'name':"都市职场",'data':['玄幻奇幻玄幻奇幻', '武侠仙侠', '都市职场']}
 ]
 const list2 = () => [
-{'name':'历史军事','data':['玄幻奇幻', '武侠仙侠', '都市职场', '都市职场']},
+{'name':'历史军事','data':['玄幻奇幻玄幻奇幻', '武侠仙侠', '都市职场', '都市职场']},
 {'name':'游戏体育','data':['玄幻奇幻', '武侠仙侠', '都市职场', '都市职场']},
 {'name':"科幻灵异",'data':['玄幻奇幻', '武侠仙侠', '都市职场', '都市职场']},
 ]
@@ -112,33 +111,16 @@ export default {
   height: 199px;
 }	
 .cate-box{
-		margin: 5px 5px;
-		height: 155px;
-		width: 82px;
-	  display:inline-block;
-	  float: left;
-	  text-align: center;
-	  overflow: hidden;
+	margin: 5px 5px;
+	height: 155px;
+	width: 82px;
+	display:inline-block;
+	float: left;
+	text-align: center;
+	overflow: hidden;
 }
-.cate-box img{
-	display: block;
-      margin: 0 auto;
-	    width: inherit;
-	    height: 88px;
-	    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+figcaption.slide-caption{
+	color: #333;
 }
-.cate-box figcaption{
-	font-size: 13px;
-	    line-height: 1.25;
-	    overflow: hidden;
-	    max-height: 34px;
-	    margin: 8px 0 2px;
-}
-.cate-box p{
-	font-size: 12px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #969ba3;
-}
+
 </style>

@@ -1,11 +1,10 @@
 <template>    
 	<div style="font-size:16px;min-height: 199px;">
-		<div class="home_title rank">
-			<i>| </i>
-			<h3>排行榜</h3>
+		<div class="home_title">
+			<h3 class="module-title">排行榜</h3>
 			<span class="more">
-				<router-link to="/rank">
-					更多>
+				<router-link to="/rank" class="module-header-btn">
+					更多 >
 				</router-link>
 			</span>
 		</div>
@@ -49,20 +48,35 @@ export default {
 		color:#333;
 		display: block;
 	}
+	.module-title {
+	    font-family: FZZCYSK;
+	    font-weight: 400;
+	    display: inline;
+	    color: #33373d;
+	}
+	.module-title::before {
+	    display: inline-block;
+	    box-sizing: border-box;
+	    width: .625rem;
+	    height: 1em;
+	    content: '';
+	    vertical-align: -.22ex;
+	    color: transparent;
+	    border-left: 2px solid #ed424b;
+	}
 	.more{
-		float: right;
-		font-size: 14px;
-		color: #969ba3;
+	    position: relative;
+	    float: right;
+	    min-width: 4rem;
+	}
+	.module-header-btn {
+	    font-size: .875rem;
+	    line-height: 1.5rem;
+	    position: absolute;
+	    right: -.75rem;
+	    padding: .5rem .5rem .5rem .75rem;
+	    white-space: nowrap;
+	    color: #969ba3;
 	}
 	
-	.rank i{
-		font-style: normal;
-		color: red;
-		font-weight: bold;
-		padding-right: 6px;
-	}
-	.rank h3{
-		display: inline;
-		font-size: 16px;
-	}
 </style>

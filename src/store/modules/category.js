@@ -12,10 +12,8 @@ const actions = {
 		commit(types.TOGGLE_START_LOADING)
 		commit(types.TOGGLE_ISSHOWBACK_Y)
     	commit(types.TOGGLE_PAGETITLE, '分类')
-		
-		const data = {username:"王五",password:"123456"}
-		const data2 = axios.get('http://localhost/reader/index.php',{
-			headers: {'Content-Type':'application/x-www-form-urlencoded'}
+		axios.get('http://localhost:80/reader-api/v1/category',{
+			headers: {'Content-Type':'application/json'}
 		}).then((res)=>{
 			commit(types.TOGGLE_CATEGORY_LIST, res.data)
 			commit(types.TOGGLE_FINISH_LOADING)

@@ -1,8 +1,7 @@
 <template>    
 <div style="font-size: 16px;">
-	<div class="home_title rank">
-		<i>| </i>
-		<h3>频道</h3>
+	<div class="home_title">
+		<h3 class="module-title">频道</h3>
 		<div class="channel_cate">
 			<span class='link selected' @click='index=0' :disabled="index === 0">
 				男生
@@ -12,11 +11,12 @@
 			</span>
 		</div>
 		<span class="more">
-			<router-link to="/channel">
-				更多>
+			<router-link to="/channel" class="module-header-btn">
+				更多 >
 			</router-link>
 		</span>
 	</div>
+
 	<swiper v-model='index' :show-dots="false" height="363px">
 		<swiper-item :key='index'>
 			<div class="book-ol book-ol-normal">
@@ -195,12 +195,14 @@ ol{
 }
 .book-cell{
 	overflow: hidden;
+	color: #969ba3;
 }
 .book-title {
     line-height: 1.4;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #333;
 }
 .book-desc{
 	line-height: 1.1875rem;

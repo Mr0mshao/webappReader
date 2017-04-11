@@ -1,8 +1,7 @@
 <template>    
 	<div style="font-size:16px;min-height: 199px;">
-		<div class="home_title hot">
-			<i>| </i>
-			<h3>热门推荐</h3>
+		<div class="home_title">
+			<h3 class="module-title">最新热门</h3>
 		</div>
 		<scroller lock-y :scrollbar-x=false ref="scroller">
 	      <div class="box1">
@@ -82,16 +81,6 @@
 		height: 44px;
 		line-height: 44px;
 		padding:  0 16px;
-	}
-	.hot i{
-		font-style: normal;
-		color: red;
-		font-weight: bold;
-		padding-right: 6px;
-	}
-	.hot h3{
-		display: inline;
-		font-size: 16px;
 	}
 	.box1 {
 	  position: relative;

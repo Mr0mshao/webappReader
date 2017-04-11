@@ -1,6 +1,8 @@
 <template>    
 <div>
 	book
+	{{DONE_BOOK_DETAIL}}
+	<img :src="DONE_BOOK_DETAIL.url" alt="">
 </div>
 </template>
 
@@ -17,7 +19,7 @@ export default {
 		window.scrollTo(0, 0)
 	},
 	created: function() {
-		this.$store.dispatch('FETCH_BOOK_DETAIL', this.$route.params.id)
+		this.$store.dispatch('FETCH_BOOK_DETAIL', {"id":this.$route.params.id})
 	},
 	computed:{
 		...mapGetters(['DONE_BOOK_DETAIL'])

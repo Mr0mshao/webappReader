@@ -3,7 +3,7 @@
 		<ol class="book-ol book-ol-normal">
 			<li class="book-li" v-for="item in datalist">
 				<router-link :to="{name:'book',params:{id:item.id}}" class="book-layout">
-					<img :src="item.img_url" class="book-cover">
+					<img :src="item.url" class="book-cover">
 						<div class="book-cell">
 							<h4 class="book-title">{{item.name}}</h4>
 							<p class="book-desc">

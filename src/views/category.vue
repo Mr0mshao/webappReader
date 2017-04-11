@@ -1,6 +1,6 @@
 <template>    
 <div>
-  <layout-list :datalist="DONE_CATEGORY_LIST.hot"></layout-list>
+  <layout-list :datalist="DONE_CATEGORY_LIST"></layout-list>
 </div>
 </template>
 
