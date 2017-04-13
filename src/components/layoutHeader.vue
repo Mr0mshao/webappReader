@@ -10,7 +10,7 @@
         <a slot="right" v-show="DONE_ISLOGIN ? false : true" @click="showReginster= true">注册</a>
         <a slot="right" v-show="DONE_ISLOGIN ? false : true" @click="showXdialog = true">登录</a>
         <span slot="right" v-show="DONE_ISLOGIN ? true : false" style="font-size:12px;">
-        {{DONE_USERINFO.username}} <span style="color: #f60">|</span> <span @click="logout">注销</span>
+        {{DONE_USERINFO.nickName}} <span style="color: #f60">|</span> <span @click="logout">注销</span>
         </span>
       </x-header>
 
@@ -93,6 +93,7 @@
       <div v-transfer-dom>
         <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-show="onShow" @on-hide="onHide">{{DONE_ISLOGIN ? '成功': '失败'}}</alert>
       </div>
+
     </div>
 </template>
 

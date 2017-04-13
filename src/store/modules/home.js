@@ -13,7 +13,7 @@ const actions = {
 		commit(types.TOGGLE_ISSHOWBACK_N)
 		commit(types.TOGGLE_PAGETITLE, '我的书城')
 		const data = {username:"王五",password:"123456"}
-		axios.get('http://localhost:80/reader-api/v1/home',{
+		axios.get('http://localhost:80/reader-api/index.php',{
 			headers: {'Content-Type':'application/json'}
 		}).then((res)=>{
 			commit(types.TOGGLE_HOME_LIST, res.data)

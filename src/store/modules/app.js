@@ -23,27 +23,58 @@ const getters = {
 const actions = {
 	[types.FETCH_LOGIN]({commit}, params){
 		state.loading = true
-		console.log('params',JSON.stringify(params))
-		window.localStorage.setItem('user',JSON.stringify(params))
-		setTimeout(()=>{
-			commit(types.TOGGLE_LOGIN, params)
+		console.log('params',params)
+		axios({
+		  url: 'http://localhost:80/reader-api/v1/sigin',
+		  method: 'post',
+		  data: params,
+		  transformRequest: [function (data) {
+		    let ret = ''
+		    for (let it in data) {
+		      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+		    }
+		    return ret
+		  }],
+		  headers: {
+		    'Content-Type': 'application/x-www-form-urlencoded'
+		  }
+		}).then((res)=>{
+			commit(types.TOGGLE_LOGIN, res.data.data)
 			state.alertShow = true
-		},2000)
+	    }).catch(function (error) {
+		   console.log(error);
+		});
 	},
 	[types.FETCH_REGISTER]({commit}, params){
 		state.loading = true
 		console.log('params',JSON.stringify(params))
 		window.localStorage.setItem('user',JSON.stringify(params))
-		setTimeout(()=>{
-			commit(types.TOGGLE_REGISTER, params)
+		axios({
+			method:'post',
+			url: 'http://localhost:80/reader-api/v1/sigup',
+			data:params,
+			transformRequest:[ function (data){
+				let ret = '';
+				for(let it in data){
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret;
+			}],
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).then((res)=>{
+			commit(types.TOGGLE_REGISTER, res.data.data)
 			state.alertShow = true
-		},2000)
+		})
 	},
 
 	[types.FETCH_LOGOUT]({commit}, params){
 		commit(types.TOGGLE_LOGOUT)
 		state.alertShow = false
 		window.localStorage.removeItem('user');
+	},
+	[types.FETCH_LOGIN_SESSION]({commit},params){
+		state.alertShow = true
+		commit(types.TOGGLE_LOGIN,params)
 	}
 }
 

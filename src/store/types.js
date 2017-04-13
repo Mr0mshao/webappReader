@@ -5,6 +5,7 @@
 
 // actions types
 export const FETCH_LOGIN = 'FETCH_LOGIN'                		// 登录
+export const FETCH_LOGIN_SESSION = 'FETCH_LOGIN_SESSION'                		// 登录
 export const FETCH_LOGOUT = 'FETCH_LOGOUT'                      // 注销
 export const FETCH_REGISTER = 'FETCH_REGISTER'                  // 注册
 export const FETCH_HOME_LIST = 'FETCH_HOME_LIST'                // 获取主页数据列表
