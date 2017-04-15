@@ -14,6 +14,35 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 
+//日期全局过滤器
+Vue.filter("formatDate", function (value) {
+  const date = `${value}`;
+  const y = date.slice(0,4);
+  const m = date.slice(4,6);
+  const d = date.slice(6,8);
+  const h = date.slice(8,10);
+  const mi = date.slice(10,12);
+  const s = date.slice(12,14);
+  return `${y}-${m}-${d} ${h}:${mi}:${s}`
+})
+//书籍类型全局过滤器
+Vue.filter("formatType", function (value) {
+  let str = '';
+  switch( value ){
+    case '00001' : str = '游戏'
+    break;
+    case '00002' : str = '都市'
+    break;
+    case '00003' : str = '玄幻'
+    break;
+    case '00004' : str = '历史'
+    break;
+    case '00005' : str = '穿越'
+    break;
+  }
+  return str;
+})
+
 //设置cookie,增加到vue实例方便全局调用
 //vue全局调用的理由是，有些组件所用到的接口可能需要session验证，session从cookie获取
 //当然，如果session保存到vuex的话除外
@@ -65,7 +94,7 @@ new Vue({
         	nickName:'ss',
         	password:'1222'
         }
-        this.$store.dispatch('FETCH_LOGIN_SESSION',data)
+        // this.$store.dispatch('FETCH_LOGIN_SESSION',data)
       }else{
         // this.$router.push('/user_info');
         console.log('success')

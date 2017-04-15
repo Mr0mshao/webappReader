@@ -47,7 +47,7 @@
 		</flexbox-item>
 	</flexbox>
 
-	<Hot :listData='DONE_HOME_LIST.username'></Hot>
+	<Hot :listData="DONE_HOME_LIST.hot"></Hot>
 	<Rank :listData='DONE_HOME_LIST.username'></Rank>
 	<Category :listData='DONE_HOME_LIST.username'></Category>
 	<Channel :listData='DONE_HOME_LIST.username'></Channel>
@@ -60,11 +60,13 @@ import Rank from '../components/rank.vue'
 import Category from '../components/category.vue'
 import Channel from '../components/channel.vue'
 import Hot  from '../components/hot.vue'
+
 import { mapGetters } from 'vuex'
 const imgList = [
-  'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff',
-  'http://placeholder.qiniudn.com/800x300/FFEF7D/ffffff',
-  'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff'
+  'http://qidian.qpic.cn/qidian_common/349573/37f39e9a422bdf33676511861a70d947/0',
+  'http://qidian.qpic.cn/qidian_common/349573/069ee39f58d1aa4b214c75f01cc4192d/0',
+  'http://qidian.qpic.cn/qidian_common/349573/78522f7f537312a67e4d79fd4e475a10/0',
+  'http://qidian.qpic.cn/qidian_common/349573/18cf119c9257474ad9f274b5ca984333/0'
 ]
 export default {
   name:'home',
@@ -76,8 +78,7 @@ export default {
     	list: imgList,
     	results: [],
     	value: null,
-    	isShow:true,
-    	
+    	isShow:true, 	
     }
   },
   methods: {
@@ -89,16 +90,15 @@ export default {
     },
     getHomeData(){
     	this.$store.dispatch('FETCH_HOME_LIST')
-    }
-    
+    },
   },
   created(){
    	this.getHomeData()
   },
 
-	computed:{
-	    ...mapGetters(['DONE_HOME_LIST','DONE_HOME_LOADING'])
-	},
+computed:{
+   ...mapGetters(['DONE_HOME_LIST','DONE_HOME_LOADING'])
+},
   
 }
 </script>

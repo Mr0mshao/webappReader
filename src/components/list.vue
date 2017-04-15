@@ -15,7 +15,7 @@
 								</div>
 								<div class="book-meta-r">
 									<span>
-										<em class="book-meta-icon">{{item.type}}</em>
+										<em class="book-meta-icon">{{item.type | formatType}}</em>
 										<em class="book-meta-icon red">{{item.status === '0' ? '连载' : '完本'}}</em>
 										<em class="book-meta-icon info">{{item.wordcount}}万字</em>
 									</span>

@@ -23,6 +23,7 @@ const getters = {
 const actions = {
 	[types.FETCH_LOGIN]({commit}, params){
 		state.loading = true
+		// state.alertShow = true;
 		console.log('params',params)
 		axios({
 		  url: 'http://localhost:80/reader-api/v1/sigin',
@@ -39,8 +40,14 @@ const actions = {
 		    'Content-Type': 'application/x-www-form-urlencoded'
 		  }
 		}).then((res)=>{
-			commit(types.TOGGLE_LOGIN, res.data.data)
-			state.alertShow = true
+			if(res.data.msg === 'ok'){
+				console.log(res.data.data)
+				commit(types.TOGGLE_LOGIN, res.data.data);
+				window.localStorage.setItem('user',JSON.stringify(res.data.data)) 
+			}else if(res.data.msg === 'error'){
+				console.log(res.data.data)
+				commit(types.TOGGLE_LOGIN_FAILURE)
+			}
 	    }).catch(function (error) {
 		   console.log(error);
 		});
@@ -63,7 +70,6 @@ const actions = {
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then((res)=>{
 			commit(types.TOGGLE_REGISTER, res.data.data)
-			state.alertShow = true
 		})
 	},
 
@@ -75,22 +81,35 @@ const actions = {
 	[types.FETCH_LOGIN_SESSION]({commit},params){
 		state.alertShow = true
 		commit(types.TOGGLE_LOGIN,params)
-	}
+	},
+	[types.FETCH_ALERTSHOW]({commit}){
+		state.alertShow = false
+	},
+	
 }
 
 const mutations = {
 	[types.TOGGLE_LOGIN](state, all){
 		state.userInfo = all
+		state.alertShow = true
 		state.isLogin = true
+		state.loading = false
+	},
+	[types.TOGGLE_LOGIN_FAILURE](state, all){
+		state.userInfo = {}
+		state.alertShow = true
+		state.isLogin = false
 		state.loading = false
 	},
 	[types.TOGGLE_REGISTER](state, all){
 		state.userInfo = all
+		state.alertShow = true
 		state.isLogin = true
 		state.loading = false
 	},
 	[types.TOGGLE_REGISTER_FAILED](state, all){
 		state.userInfo = {}
+		state.alertShow = false
 		state.isLogin = false
 		state.loading = false
 	},

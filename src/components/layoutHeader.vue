@@ -66,6 +66,16 @@
 <img slot="label" style="padding-right:10px;display:block;" src="../assets/email.png" width="24" height="24">
               </x-input>
               <x-input 
+                title="昵 称：" 
+                placeholder="请输入昵称" 
+                type="text"
+                
+                v-model="registerInfo.nickName"
+                :required="true"
+              >
+<img slot="label" style="padding-right:10px;display:block;" src="../assets/email.png" width="24" height="24">
+              </x-input>
+              <x-input 
                 title="密 码：" 
                 type="password"
                 v-model="registerInfo.password"
@@ -91,7 +101,7 @@
         </x-dialog>
       </div>
       <div v-transfer-dom>
-        <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-show="onShow" @on-hide="onHide">{{DONE_ISLOGIN ? '成功': '失败'}}</alert>
+        <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-show="onShow" @on-hide="onHide">{{DONE_ISLOGIN ? '成功' : '失败'}}</alert>
       </div>
 
     </div>
@@ -113,6 +123,7 @@ export default {
       registerInfo:{
         username:'',
         email:'',
+        nickName:'',
         password:'',
         confirPassword:'',
       },
@@ -135,9 +146,13 @@ export default {
     getValue(){
       this.alertTitle = '登录'
       console.log(this.loginInfo);
-
-      this.showXdialog = false;
-      this.login(this.loginInfo)
+      if( this.loginInfo.username && this.loginInfo.password ){
+        this.showXdialog = false;
+        this.login(this.loginInfo)
+      }else{
+        // alert('xxx')
+        return false
+      }
     },
     getRegValue(){
       this.alertTitle = '注册'
@@ -158,6 +173,7 @@ export default {
     },
     onHide () {
       console.log('on hide')
+      this.$store.dispatch('FETCH_ALERTSHOW')
     },
     onShow () {
       console.log('on show')
@@ -174,7 +190,7 @@ export default {
   color: #666;
 }
 .dialog-content{
-  height: 200px;
+  height: 243px;
   overflow: hidden;
   
   position: relative;

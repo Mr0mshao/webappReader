@@ -5,15 +5,16 @@
 		</div>
 		<scroller lock-y :scrollbar-x=false ref="scroller">
 	      <div class="box1">
-	        <div class="box1-item" v-for="i in imglist">
-	        	<router-link to="/rank" class="routerlink">
-	        		<img :src="i.url" class="slide-img">
-	        		<figcaption class="slide-caption">{{i.name}}</figcaption>
-	        		<p class="slide-author"> 一梦黄粱 </p>
+	        <div class="box1-item" v-for="item in listData">
+	        	<router-link :to="{name:'book',params:{id:item.id}}" class="routerlink">
+	        		<img :src="item.url" class="slide-img">
+	        		<figcaption class="slide-caption">{{item.name}}</figcaption>
+	        		<p class="slide-author"> {{item.author}} </p>
 	        	</router-link>
 	        </div>
 	      </div>
 	    </scroller>
+
 	</div>
 </template>
 
@@ -29,10 +30,10 @@
 	    	imglist2:[
 	    	{
 	    		"name":'xxx',
-	    		"url":'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff'
+	    		"url":'http://qidian.qpic.cn/qdbimg/349573/1005038448/150'
 	    	},{
 	    		"name":'sss',
-	  			"url":'http://placeholder.qiniudn.com/800x300/FFEF7D/ffffff',
+	  			"url":'http://qidian.qpic.cn/qdbimg/349573/1003667321/150',
 	    	},{
 	    		"name":'ttt',
 	  			"url":'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff',

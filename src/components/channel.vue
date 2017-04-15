@@ -17,7 +17,7 @@
 		</span>
 	</div>
 
-	<swiper v-model='index' :show-dots="false" height="363px">
+	<swiper v-model='index' :show-dots="false" height="456px">
 		<swiper-item :key='index'>
 			<div class="book-ol book-ol-normal">
 				<div class="book-li">
@@ -235,7 +235,7 @@ ol{
 	padding: 1px 5px; 
 }
 .red{
-	color:red;
+	color:#ed424b;
 
 }
 .info{

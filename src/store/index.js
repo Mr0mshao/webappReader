@@ -6,6 +6,7 @@ import rank from './modules/rank.js'
 import category from './modules/category.js'
 import channel from './modules/channel.js'
 import book from './modules/book.js'
+import catalogue from './modules/catalogue.js'
 
 
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
 		rank,
 		category,
 		channel,
-		book
+		book,
+		catalogue
 	},
 })

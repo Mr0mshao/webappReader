@@ -5,6 +5,8 @@ import Books from '@/views/book'
 import Rank  from '@/views/rank'
 import Category  from '@/views/category'
 import Channel  from '@/views/channel'
+import Catalogue  from '@/views/catalogue'
+import Reader  from '@/views/reader'
 
 
 Vue.use(Router)
@@ -42,9 +44,17 @@ export default new Router({
     	name:'category',
     	component: Category
     },{
-    	path:'/book/:id',
-    	name:'book',
-    	component: Books
+        path:'/book/:id',
+        name:'book',
+        component: Books
+    },{
+        path:'/catalogue/:id',
+        name:'catalogue',
+        component: Catalogue
+    },{
+    	path:'/reader/:id',
+    	name:'reader',
+    	component: Reader
     },
   ]
 })
