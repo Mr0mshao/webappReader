@@ -10,11 +10,11 @@
 		</div>
 		<scroller lock-y :scrollbar-x=false>
 			<div class="box1">
-		        <div class="box1-item" v-for="i in 7">
-		        	<router-link to="/rank" class="routerlink">
-		        		<img src="../assets/150.jpg" class="slide-img">
-		        		<figcaption class="slide-caption">xxxx</figcaption>
-		        		<p class="slide-author"> 一梦黄粱 </p>
+		        <div class="box1-item" v-for="item in listData">
+		        	<router-link :to="{name:'book',params:{id:item.id}}" class="routerlink">
+		        		<img :src="item.url" class="slide-img">
+		        		<figcaption class="slide-caption">{{item.name}}</figcaption>
+		        		<p class="slide-author">{{item.author}}</p>
 		        	</router-link>
 		        </div>
 	      	</div>

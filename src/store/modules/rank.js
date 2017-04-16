@@ -13,18 +13,33 @@ const actions = {
 		commit(types.TOGGLE_START_LOADING)
 		commit(types.TOGGLE_ISSHOWBACK_Y)
 		commit(types.TOGGLE_PAGETITLE, '排行')
-    axios.get('http://localhost:80/reader-api/v1/rank',{
-      headers: {'Content-Type':'application/json'}
-    }).then((res)=>{
-      commit(types.TOGGLE_RANK_LIST, res.data)
-      commit(types.TOGGLE_FINISH_LOADING)
-    })
+	    axios.get('http://localhost:80/reader-api/v1/rank',{
+	      headers: {'Content-Type':'application/json'}
+	    }).then((res)=>{
+	      commit(types.TOGGLE_RANK_LIST, res.data)
+	      commit(types.TOGGLE_FINISH_LOADING)
+	    })
+	},
+	[types.FETCH_RANK_LIST_MORE]({commit},params){
+		axios.get('http://localhost:80/reader-api/v1/rank',{
+	      headers: {'Content-Type':'application/json'},
+	      params
+	    }).then((res)=>{
+	      commit(types.TOGGLE_RANK_LIST_MORE, res.data)
+	      commit(types.TOGGLE_FINISH_LOADING)
+	    })
+	 console.log(params)
 	}
 }
 
 const mutations = {
 	[types.TOGGLE_RANK_LIST](state, all){
 		state.rankList = all	
+	},
+	[types.TOGGLE_RANK_LIST_MORE](state, all){
+		for(let i=0;i<all.length;i++){
+			state.rankList.push(all[i])	
+		}
 	}
 }
 

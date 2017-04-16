@@ -3,143 +3,48 @@
 	<div class="home_title">
 		<h3 class="module-title">频道</h3>
 		<div class="channel_cate">
-			<span class='link selected' @click='index=0' :disabled="index === 0">
+			<span class='link' @click='index=0' :disabled="index === 0">
 				男生
 			</span>
 			<span class='link' @click='index=1' :disabled="index === 1">
 				女生
 			</span>
 		</div>
-		<span class="more">
+		<!-- <span class="more">
 			<router-link to="/channel" class="module-header-btn">
 				更多 >
 			</router-link>
-		</span>
+		</span> -->
 	</div>
 
 	<swiper v-model='index' :show-dots="false" height="456px">
-		<swiper-item :key='index'>
+		<swiper-item :key='index' v-for="item in listData">
 			<div class="book-ol book-ol-normal">
-				<div class="book-li">
-					<router-link to="/rank" class="book-layout">
-						<img src="../assets/150.jpg" class="book-cover">
+				<div class="book-li" v-for="i in item">
+					<router-link :to="{name:'book',params:{id:i.id}}" class="book-layout">
+						<img :src="i.url" class="book-cover">
 						<div class="book-cell">
-							<h4 class="book-title">神级剑魂系统</h4>
+							<h4 class="book-title">{{i.name}}</h4>
 							<p class="book-desc">
-								森罗万象，皆为灰烬，流刃若火！穿越到海贼世界，大海贼时代十一年的罗亚，得到了一个能够无限强化，抽取各种技能的剑魂系统。流刃若火，镜花水月，月牙天冲，千本樱……“我这一刀下去，你可能会被烧死。”罗亚看着眼前的赤犬，很认真的说道。………………………………风盟2群：580391329
+								{{i.description}}
 							</p>
 							<div class="book-meta">
 								<div class="book-meta-l">
-									作者：<span>马是好</span>
+									作者：<span>{{i.author}}</span>
 								</div>
 								<div class="book-meta-r">
 									<span>
-										<em class="book-meta-icon">二次元</em>
-										<em class="book-meta-icon red">二次元</em>
-										<em class="book-meta-icon info">二次元</em>
+										<em class="book-meta-icon">{{i.type | formatType}}</em>
+										<em class="book-meta-icon red">{{i.status === '1' ? '完本' : '连载' }}</em>
+										<em class="book-meta-icon info">{{i.wordcount}}千字</em>
 									</span>
 								</div>
 							</div>
 						</div>
 					</router-link>				
 				</div>
-				<div class="book-li">
-					<router-link to="/rank" class="book-layout">
-						<img src="../assets/150.jpg" class="book-cover">
-						<div class="book-cell">
-							<h4 class="book-title">神级剑魂系统</h4>
-							<p class="book-desc">
-								森罗万象，皆为灰烬，流刃若火！穿越到海贼世界，大海贼时代十一年的罗亚，得到了一个能够无限强化，抽取各种技能的剑魂系统。流刃若火，镜花水月，月牙天冲，千本樱……“我这一刀下去，你可能会被烧死。”罗亚看着眼前的赤犬，很认真的说道。………………………………风盟2群：580391329
-							</p>
-							<div class="book-meta">
-								<div class="book-meta-l">
-									作者：<span>马是好</span>
-								</div>
-								<div class="book-meta-r">
-									<span>
-										<em class="book-meta-icon">二次元</em>
-										<em class="book-meta-icon red">二次元</em>
-										<em class="book-meta-icon info">推荐</em>
-									</span>
-								</div>
-							</div>
-						</div>
-					</router-link>
-				</div><div class="book-li">
-					<router-link to="/rank" class="book-layout">
-						<img src="../assets/150.jpg" class="book-cover">
-						<div class="book-cell">
-							<h4 class="book-title">神级剑魂系统</h4>
-							<p class="book-desc">
-								森罗万象，皆为灰烬，流刃若火！穿越到海贼世界，大海贼时代十一年的罗亚，得到了一个能够无限强化，抽取各种技能的剑魂系统。流刃若火，镜花水月，月牙天冲，千本樱……“我这一刀下去，你可能会被烧死。”罗亚看着眼前的赤犬，很认真的说道。………………………………风盟2群：580391329
-							</p>
-							<div class="book-meta">
-								<div class="book-meta-l">
-									作者：<span>马是好</span>
-								</div>
-								<div class="book-meta-r">
-									<span>
-										<em class="book-meta-icon">二次元</em>
-										<em class="book-meta-icon red">二次元</em>
-										<em class="book-meta-icon info">二次元</em>
-									</span>
-								</div>
-							</div>
-						</div>
-					</router-link>
-				</div>
+
 			</div>		
-		</swiper-item>
-		<swiper-item :key='index'>
-			<ol class="book-ol book-ol-normal">
-				<li class="book-li">
-					<router-link to="/rank" class="book-layout">
-						<img src="../assets/151.jpg" class="book-cover">
-						<div class="book-cell">
-							<h4 class="book-title">剑魂系统</h4>
-							<p class="book-desc">
-								森罗万象，皆为灰烬，流刃若火！穿越到海贼世界，大海贼时代十一年的罗亚，得到了一个能够无限强化，抽取各种技能的剑魂系统。流刃若火，镜花水月，月牙天冲，千本樱……“我这一刀下去，你可能会被烧死。”罗亚看着眼前的赤犬，很认真的说道。………………………………风盟2群：580391329
-							</p>
-							<div class="book-meta">
-								<div class="book-meta-l">
-									作者：<span>马好</span>
-								</div>
-								<div class="book-meta-r">
-									<span>
-										<em class="book-meta-icon">二次元</em>
-										<em class="book-meta-icon red">二次元</em>
-										<em class="book-meta-icon info">二元</em>
-									</span>
-								</div>
-							</div>
-						</div>
-					</router-link>
-					
-				</li>
-				<li class="book-li">
-					<router-link to="/rank" class="book-layout">
-						<img src="../assets/151.jpg" class="book-cover">
-						<div class="book-cell">
-							<h4 class="book-title">神级剑魂</h4>
-							<p class="book-desc">
-								森罗万象，皆为灰烬，流刃若火！穿越到海贼世界，大海贼时代十一年的罗亚，得到了一个能够无限强化，抽取各种技能的剑魂系统。流刃若火，镜花水月，月牙天冲，千本樱……“我这一刀下去，你可能会被烧死。”罗亚看着眼前的赤犬，很认真的说道。………………………………风盟2群：580391329
-							</p>
-							<div class="book-meta">
-								<div class="book-meta-l">
-									作者：<span>马是好</span>
-								</div>
-								<div class="book-meta-r">
-									<span>
-										<em class="book-meta-icon">二次元</em>
-										<em class="book-meta-icon red">连载</em>
-										<em class="book-meta-icon info">二次元</em>
-									</span>
-								</div>
-							</div>
-						</div>
-					</router-link>
-				</li>
-			</ol>		
 		</swiper-item>
 	</swiper>
 </div>
@@ -207,7 +112,7 @@ ol{
 .book-desc{
 	line-height: 1.1875rem;
     display: -webkit-box;
-    height: 2.25rem;
+    height: 3.25rem;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     font-size: .875rem;

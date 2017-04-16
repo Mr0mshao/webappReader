@@ -7,13 +7,13 @@
 				<img class="book-cover" :src="DONE_BOOK_DETAIL.url"></img>
 				<div class="book-cell">
 					<h2 class="book-title">{{DONE_BOOK_DETAIL.name}}</h2>
-					<div class="book-rand-a">{{DONE_BOOK_DETAIL.author}}</div>
-					<div class="book-score">{{DONE_BOOK_DETAIL.type | formatType}}</div>
-					<p class="book-meta">类型：{{DONE_BOOK_DETAIL.keywords}}</p>
+					<div class="book-rand-a">作者：{{DONE_BOOK_DETAIL.author}}</div>
+					<div class="book-score">类型：{{DONE_BOOK_DETAIL.type | formatType}}</div>
+					<p class="book-meta">关键字：{{DONE_BOOK_DETAIL.keywords}}</p>
 					<p class="book-meta">
-						状态：{{DONE_BOOK_DETAIL.wordcount}}万字
+						状态：{{DONE_BOOK_DETAIL.wordcount}}千字
 						<span class="char-pipe">|</span>
-						<span class="red">{{DONE_BOOK_DETAIL.status === 0 ? '连载' : '完本'}}</span>
+						<span class="red">{{DONE_BOOK_DETAIL.status == 0 ? '连载' : '完本'}}</span>
 					</p>
                     <p class="book-meta">上架时间：{{DONE_BOOK_DETAIL.createtime | formatDate}}</p>
 				</div>
@@ -21,7 +21,10 @@
 			<div class="book-detail-btn">
 				<ul class="btn-group">
 					<li class="btn-group-cell">
-						<router-link class="btn-normal red" to="/rank">免费试读</router-link>
+                        <router-link class="btn-normal white" to="/rank">开始阅读</router-link>
+                    </li>
+                    <li class="btn-group-cell">
+						<router-link class="btn-normal red" to="/rank" style="background-color:#fff">继续阅读</router-link>
 					</li>
 				</ul>
 			</div>
@@ -161,7 +164,7 @@ export default {
     padding: 0 1rem;
     text-align: center;
     border-radius: .125rem;
-    background-color: currentColor;
+    background-color: #ed424b;
 }
 .module-merge {
     margin: 0;
@@ -255,6 +258,9 @@ export default {
 
 .gray {
     color: #969ba3;
+}
+.white{
+    color: #fff
 }
 
 .module-detail-bg{

@@ -33,15 +33,19 @@
 <script>
 
 
+import { mapGetters } from 'vuex'
 export default {
   name:'list',
-  components: {},
+  components: { },
   props:['datalist'],
   data () {
     return {}
   },
-  methods: {},
-  computed:{},
+  methods: {
+  },
+  computed:{
+
+  },
   mounted(){},
 }
 

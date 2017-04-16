@@ -21,14 +21,14 @@
 	></search>
 	<flexbox class='home_nav'>
 		<flexbox-item>
-			<router-link to='/male' class='routerlink flex-demo'>
+			<router-link :to="{name:'channel',params:{type:1}}" class='routerlink flex-demo'>
 				<!-- <icon type='warn'></icon> -->
 				<img src="../assets/male.png"class="icon">
 				<p>男生</p>
 			</router-link>
 		</flexbox-item>
 		<flexbox-item>
-			<router-link to='/famale' class='routerlink flex-demo'>
+			<router-link :to="{name:'channel2',params:{type:0}}" class='routerlink flex-demo'>
 				<img src="../assets/famale.png"class="icon">
 				<p>女生</p>
 			</router-link>
@@ -48,9 +48,9 @@
 	</flexbox>
 
 	<Hot :listData="DONE_HOME_LIST.hot"></Hot>
-	<Rank :listData='DONE_HOME_LIST.username'></Rank>
-	<Category :listData='DONE_HOME_LIST.username'></Category>
-	<Channel :listData='DONE_HOME_LIST.username'></Channel>
+	<Rank :listData='DONE_HOME_LIST.rank'></Rank>
+	<Category :listData='DONE_HOME_LIST.category'></Category>
+	<Channel :listData='DONE_HOME_LIST.channel'></Channel>
 </div>
 </template>
 

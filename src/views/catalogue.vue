@@ -12,9 +12,11 @@ export default {
     return {}
   },
   methods: {},
-  create (){},
-  mounted(){
+  created (){
     this.$store.dispatch('FETCH_CATALOGUR',{"id":this.$route.params.id})
+  },
+  mounted(){
+    
   },
   computed:{
     ...mapGetters(['DONE_CATALOGUR','FETCH_CATALOGUR'])

@@ -9,6 +9,7 @@ const state = {
 	registerState:false,
 	alertShow:false,
 	pageTitle:'我的书城',
+	alertContent:'',
 }
 const getters = {
 	[types.DONE_LOADING]:state => state.loading,
@@ -18,6 +19,7 @@ const getters = {
 	[types.DONE_REGISTER_STATE]:state => state.registerState,
 	[types.DONE_ALERTSHOW]:state => state.alertShow,
 	[types.DONE_PAGETITLE]:state => state.pageTitle,
+	[types.DONE_ALERT_CONTENT]:state => state.alertContent,
 }
 
 const actions = {
@@ -43,10 +45,12 @@ const actions = {
 			if(res.data.msg === 'ok'){
 				console.log(res.data.data)
 				commit(types.TOGGLE_LOGIN, res.data.data);
+				commit(types.TOGGLE_ALERT_CONTENT, '成功')
 				window.localStorage.setItem('user',JSON.stringify(res.data.data)) 
 			}else if(res.data.msg === 'error'){
 				console.log(res.data.data)
 				commit(types.TOGGLE_LOGIN_FAILURE)
+				commit(types.TOGGLE_ALERT_CONTENT, '失败')
 			}
 	    }).catch(function (error) {
 		   console.log(error);
@@ -69,7 +73,14 @@ const actions = {
 			}],
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then((res)=>{
-			commit(types.TOGGLE_REGISTER, res.data.data)
+			console.log(res.data);
+			if(res.data.status == 'error'){
+				commit(types.TOGGLE_ALERT_CONTENT, res.data.msg)
+				commit(types.TOGGLE_REGISTER_FAILED, res.data.data)
+			}else if(res.data.status == 'ok'){
+				commit(types.TOGGLE_REGISTER, params)
+				commit(types.TOGGLE_ALERT_CONTENT, '成功')	
+			}
 		})
 	},
 
@@ -85,6 +96,7 @@ const actions = {
 	[types.FETCH_ALERTSHOW]({commit}){
 		state.alertShow = false
 	},
+	
 	
 }
 
@@ -109,7 +121,7 @@ const mutations = {
 	},
 	[types.TOGGLE_REGISTER_FAILED](state, all){
 		state.userInfo = {}
-		state.alertShow = false
+		state.alertShow = true
 		state.isLogin = false
 		state.loading = false
 	},
@@ -135,6 +147,10 @@ const mutations = {
 	[types.TOGGLE_PAGETITLE](stata, str){
 		state.alertShow = false
 		state.pageTitle = str
+	},
+	[types.TOGGLE_ALERT_CONTENT](stata, str){
+		state.alertShow = true
+		state.alertContent = str
 	}
 
 }

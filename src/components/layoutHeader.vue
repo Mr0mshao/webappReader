@@ -77,6 +77,7 @@
               </x-input>
               <x-input 
                 title="密 码：" 
+                placeholder="请输入密码"
                 type="password"
                 v-model="registerInfo.password"
                 :required="true"
@@ -84,7 +85,8 @@
 <img slot="label" style="padding-right:10px;display:block;" src="../assets/pwd.png" width="24" height="24">
               </x-input>
               <x-input 
-                title="确认密码：" 
+                title="确认密码："
+                placeholder="请输入确认密码" 
                 type="password"
                 :required="true"
                 v-model="registerInfo.confirPassword"
@@ -101,7 +103,7 @@
         </x-dialog>
       </div>
       <div v-transfer-dom>
-        <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-show="onShow" @on-hide="onHide">{{DONE_ISLOGIN ? '成功' : '失败'}}</alert>
+        <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-show="onShow" @on-hide="onHide">{{DONE_ALERT_CONTENT}}</alert>
       </div>
 
     </div>
@@ -140,26 +142,33 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['DONE_USERINFO','DONE_ISLOGIN','DONE_ALERTSHOW','DONE_PAGETITLE'])
+    ...mapGetters(['DONE_USERINFO','DONE_ISLOGIN','DONE_ALERTSHOW','DONE_PAGETITLE',
+      'DONE_ALERT_CONTENT'])
   },
   methods:{
     getValue(){
-      this.alertTitle = '登录'
       console.log(this.loginInfo);
       if( this.loginInfo.username && this.loginInfo.password ){
+        this.alertTitle = '登录'
         this.showXdialog = false;
         this.login(this.loginInfo)
       }else{
-        // alert('xxx')
+        alert('请输入完整')
         return false
       }
     },
     getRegValue(){
-      this.alertTitle = '注册'
       console.log(this.registerInfo);
+      if(this.registerInfo.username && this.registerInfo.password && this.registerInfo.nickName && this.registerInfo.confirPassword && this.registerInfo.email ){
+        this.alertTitle = '注册'
+        this.showReginster = false;
+        this.register(this.registerInfo)
+      }else{
+        alert('请输入完整')
+        return false
+      }
 
-      this.showReginster = false;
-      this.register(this.registerInfo)
+      
     },
     login(params){
       this.$store.dispatch('FETCH_LOGIN',params)
@@ -190,7 +199,7 @@ export default {
   color: #666;
 }
 .dialog-content{
-  height: 243px;
+  height: 263px;
   overflow: hidden;
   
   position: relative;

@@ -1,7 +1,7 @@
 <template>    
 <div>
-  <layout-list :datalist="DONE_CHANNEL_LIST_MAN"></layout-list>
-  <x-button type="default" @click.native="loadMore_man">加载更多...</x-button>
+  <layout-list :datalist="DONE_CHANNEL_LIST_FAMALE"></layout-list>
+  <x-button type="default" @click.native="loadMore_famale">加载更多...</x-button>
 </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     }
   },
  	methods: {
-    loadMore_man(){
+    loadMore_famale(){
       this.$store.dispatch('FETCH_CHANNEL_LIST',{"type":this.$route.params.type,"page":this.currPage++})
     }
   },
@@ -27,7 +27,7 @@ export default {
   },
   mounted(){},
   computed:{
-    ...mapGetters(['DONE_CHANNEL_LIST_MAN'])
+    ...mapGetters(['DONE_CHANNEL_LIST_FAMALE'])
   }
 }
 

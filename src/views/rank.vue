@@ -1,24 +1,34 @@
 <template>    
 <div>
-
+  <!-- {{DONE_RANK_LIST}} -->
   <layout-list :datalist="DONE_RANK_LIST"></layout-list>
+  <x-button type="default" @click.native="loadMore">加载更多...</x-button>
 </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import layoutList from '../components/list.vue'
+import { XButton} from 'vux'
 
 export default {
   name:'rank',
-  components: {layoutList },
+  components: {layoutList,XButton },
   data () {
-    return {}
+    return {
+      currPage:1
+    }
   },
-  methods: {},
-  create (){},
-  mounted(){
+  methods: {
+    loadMore(){
+      this.$store.dispatch('FETCH_RANK_LIST_MORE',{"page": ++this.currPage})
+    }
+  },
+  created (){
     this.$store.dispatch('FETCH_RANK_LIST')
+  },
+  mounted(){
+    
   },
   computed:{
     ...mapGetters(['DONE_RANK_LIST','FETCH_RANK_LIST'])

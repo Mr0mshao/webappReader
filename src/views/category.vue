@@ -14,12 +14,10 @@ export default {
     return {}
   },
   methods: {},
-  create (){},
-  mounted(){
-
-      this.$store.dispatch('FETCH_CATEGORY_LIST')
-
+  created (){
+    this.$store.dispatch('FETCH_CATEGORY_LIST')
   },
+  mounted(){},
   computed:{
     ...mapGetters(['DONE_CATEGORY_LIST','FETCH_CATEGORY_LIST'])
   }
