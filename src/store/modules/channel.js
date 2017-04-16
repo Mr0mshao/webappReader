@@ -3,6 +3,8 @@ import * as types from '../types.js'
 const state = {
 	channelListMan : [],
 	channelListFamale : [],
+	channelListManCount:null,
+	channelListFamaleCount:null,
 }
 const getters = {
 	[types.DONE_CHANNEL_LIST_MAN]:state => state.channelListMan,
@@ -34,12 +36,26 @@ const actions = {
 const mutations = {
 	[types.TOGGLE_CHANNEL_LIST_MAN](state, all){
 		for(let i=0;i<all.length;i++){
-			state.channelListMan.push(all[i])
+			if(state.channelListMan.length >= all.length){
+				if( all[i].id == state.channelListMan[i].id){
+				}else{
+					state.channelListMan.push(all[i])
+				}
+			}else{
+				state.channelListMan.push(all[i])
+			}
 		}
 	},
 	[types.TOGGLE_CHANNEL_LIST_FAMALE](state, all){
 		for(let i=0;i<all.length;i++){
-			state.channelListFamale.push(all[i])
+			if(state.channelListFamale.length >= all.length){
+				if( all[i].id == state.channelListFamale[i].id){
+				}else{
+					state.channelListFamale.push(all[i])
+				}
+			}else{
+				state.channelListFamale.push(all[i])
+			}
 		}
 	}
 }

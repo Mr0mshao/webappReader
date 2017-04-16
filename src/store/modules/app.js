@@ -25,8 +25,6 @@ const getters = {
 const actions = {
 	[types.FETCH_LOGIN]({commit}, params){
 		state.loading = true
-		// state.alertShow = true;
-		console.log('params',params)
 		axios({
 		  url: 'http://localhost:80/reader-api/v1/sigin',
 		  method: 'post',
