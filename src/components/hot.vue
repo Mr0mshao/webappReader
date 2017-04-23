@@ -25,50 +25,10 @@
 	  components: {Scroller},
 	  props:['listData'],
 	  data () {
-	    return {
-	    	imglist:[],
-	    	imglist2:[
-	    	{
-	    		"name":'xxx',
-	    		"url":'http://qidian.qpic.cn/qdbimg/349573/1005038448/150'
-	    	},{
-	    		"name":'sss',
-	  			"url":'http://qidian.qpic.cn/qdbimg/349573/1003667321/150',
-	    	},{
-	    		"name":'ttt',
-	  			"url":'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff',
-	    	},{
-	    		"name":'xxx',
-	    		"url":'http://placeholder.qiniudn.com/800x300/FF3B3B/ffffff'
-	    	},{
-	    		"name":'sss',
-	  			"url":'http://placeholder.qiniudn.com/800x300/FFEF7D/ffffff',
-	    	},{
-	    		"name":'ttt',
-	  			"url":'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff',
-	    	},{
-	    		"name":'ttt',
-	  			"url":'http://placeholder.qiniudn.com/800x300/8AEEB1/ffffff',
-	    	},
-	  		
-	  		]
-	    }
+	    return {}
 	  },
-	  methods: {
-	  	xx(){
-	  		setTimeout(()=>{
-	  			this.$nextTick(() => {
-					  this.$refs.scroller.reset()
-					})
-	  			this.imglist = this.imglist2;
-	  			console.log(111)
-	  			// this.$vux.loading.hide()
-	  		},1000)
-	  	},
-	  },
-	  mounted(){
-	  	this.xx();
-	  },
+	  methods: {},
+	  mounted(){},
 	}
 </script>
 

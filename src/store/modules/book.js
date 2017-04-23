@@ -9,17 +9,18 @@ const getters = {
 
 const actions = {
 	[types.FETCH_BOOK_DETAIL]({commit},params){
+		console.log(params)
 		commit(types.TOGGLE_START_LOADING)
 		commit(types.TOGGLE_ISSHOWBACK_Y)
-		// commit(types.TOGGLE_PAGETITLE, '我的书城')
-		axios.get('http://localhost:80/reader-api/v1/book',{
-	      headers: {'Content-Type':'application/json'},
-	      params
+		axios.get(`http://localhost/reader-api/v1/book/${params.id}`,{
+	      headers: {'Content-Type':'application/json'}
 	    }).then((res)=>{
 			commit(types.TOGGLE_BOOK_DETAIL, res.data)
 			commit(types.TOGGLE_PAGETITLE, `${res.data.name}`)
 			commit(types.TOGGLE_FINISH_LOADING)
-	    })
+	    }).catch(function (error) {
+		   console.log(error);
+		});
 
 	}
 }

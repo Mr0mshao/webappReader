@@ -1,6 +1,6 @@
 <template>
 	<div class="back-to-top">
-		<button type="button">Top</button>
+		<button type="button">TOP</button>
 	</div>
 </template>
 
@@ -20,13 +20,14 @@ export default {
 	outline: none;
 	/* ===color=== */
 	background-color: #00B4FF;
+	opacity: 0.7;
 	color: white;
 	font-size: 1rem;
 	box-shadow: 0px 0px 20px #dbdada;
 	/* ===size and position=== */
 	position: fixed;
 	right: 1rem;
-	bottom: 1rem;
+	bottom: 8rem;
 	width: 2rem;
 	height: 2rem;
 	border-radius: 50%;

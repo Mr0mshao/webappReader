@@ -12,12 +12,14 @@ const actions = {
 		commit(types.TOGGLE_START_LOADING)
 		commit(types.TOGGLE_ISSHOWBACK_N)
 		commit(types.TOGGLE_PAGETITLE, '我的书城')
-		axios.get('http://localhost:80/reader-api/index.php',{
+		axios.get('http://localhost:80/reader-api/v1/home',{
 			headers: {'Content-Type':'application/json'}
 		}).then((res)=>{
 			commit(types.TOGGLE_HOME_LIST, res.data)
 			commit(types.TOGGLE_FINISH_LOADING)
-		})
+		}).catch(function (error) {
+		   console.log(error);
+		});
 	}
 }
 

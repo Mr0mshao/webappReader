@@ -147,6 +147,14 @@ ol{
 	color:blue;
 
 }
+.footer-copy {
+    font-size: .75rem;
+    font-weight: 300;
+    padding-top: .25rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    color: #969ba3;
+}
 </style>
 
 

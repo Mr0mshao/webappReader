@@ -29,17 +29,32 @@ const actions = {
 				commit(types.TOGGLE_CHANNEL_LIST_MAN, res.data)
 			}
 			commit(types.TOGGLE_FINISH_LOADING)
-	    })
+	    }).catch(function (error) {
+		   console.log(error);
+		});
+	},
+	[types.FETCH_CHANNEL_CLEARN_MAN]({commit}){
+		commit(types.TOGGLE_CHANNEL_CLEARN_MAN)
+	},
+	[types.FETCH_CHANNEL_CLEARN_FAMALE]({commit}){
+		commit(types.TOGGLE_CHANNEL_CLEARN_FAMALE)
 	},
 }
 
 const mutations = {
+	[types.TOGGLE_CHANNEL_CLEARN_MAN](state){
+		state.channelListMan = [];
+	},
+	[types.TOGGLE_CHANNEL_CLEARN_FAMALE](state){
+		state.channelListFamale = [];
+	},
 	[types.TOGGLE_CHANNEL_LIST_MAN](state, all){
 		for(let i=0;i<all.length;i++){
 			if(state.channelListMan.length >= all.length){
 				if( all[i].id == state.channelListMan[i].id){
 				}else{
 					state.channelListMan.push(all[i])
+
 				}
 			}else{
 				state.channelListMan.push(all[i])
@@ -50,12 +65,13 @@ const mutations = {
 		for(let i=0;i<all.length;i++){
 			if(state.channelListFamale.length >= all.length){
 				if( all[i].id == state.channelListFamale[i].id){
+					
 				}else{
 					state.channelListFamale.push(all[i])
 				}
 			}else{
 				state.channelListFamale.push(all[i])
-			}
+			}	
 		}
 	}
 }

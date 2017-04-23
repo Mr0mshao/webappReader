@@ -23,6 +23,7 @@ export default {
     }
   },
   created (){
+    this.$store.dispatch('FETCH_CHANNEL_CLEARN_FAMALE')
     this.$store.dispatch('FETCH_CHANNEL_LIST',{"type":this.$route.params.type,"page":this.currPage++})
   },
   mounted(){},

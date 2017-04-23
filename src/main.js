@@ -29,16 +29,12 @@ Vue.filter("formatDate", function (value) {
 Vue.filter("formatType", function (value) {
   let str = '';
   switch( value ){
-    case '00001' : str = '游戏'
-    break;
-    case '00002' : str = '都市'
-    break;
-    case '00003' : str = '玄幻'
-    break;
-    case '00004' : str = '历史'
-    break;
-    case '00005' : str = '穿越'
-    break;
+      case '00001':str='玄幻奇幻';break;
+      case '00002':str='武侠仙侠';break;
+      case '00003':str='都市职场';break;
+      case '00004':str='历史军事';break;
+      case '00005':str='游戏体育';break;
+      case '00006':str='科幻灵异';break;
   }
   return str;
 })

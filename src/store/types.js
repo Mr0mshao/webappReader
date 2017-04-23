@@ -5,19 +5,23 @@
 
 // actions types
 export const FETCH_LOGIN = 'FETCH_LOGIN'                		// 登录
-export const FETCH_LOGIN_SESSION = 'FETCH_LOGIN_SESSION'                		// session登录
+export const FETCH_LOGIN_SESSION = 'FETCH_LOGIN_SESSION'        // session登录
 export const FETCH_LOGOUT = 'FETCH_LOGOUT'                      // 注销
 export const FETCH_REGISTER = 'FETCH_REGISTER'                  // 注册
 export const FETCH_HOME_LIST = 'FETCH_HOME_LIST'                // 获取主页数据列表
 export const FETCH_RANK_LIST = 'FETCH_RANK_LIST'                // 获取排行
-export const FETCH_RANK_LIST_MORE = 'FETCH_RANK_LIST_MORE'            // 重置alert的显示
+export const FETCH_RANK_LIST_MORE = 'FETCH_RANK_LIST_MORE'      // 加载更多
 export const FETCH_CATEGORY_LIST = 'FETCH_CATEGORY_LIST'        // 获取分类
-export const FETCH_CATEGORY_LIST_MORE = 'FETCH_CATEGORY_LIST_MORE'        // 获取分类
+export const FETCH_CATEGORY_DETAIL = 'FETCH_CATEGORY_DETAIL'    // 获取分类
+export const FETCH_CATEGORY_LIST_MORE = 'FETCH_CATEGORY_LIST_MORE'  // 获取分类
 export const FETCH_CHANNEL_LIST = 'FETCH_CHANNEL_LIST'          // 获取频道
-//export const FETCH_CHANNEL_LIST_MORE = 'FETCH_CHANNEL_LIST_MORE'          // 获取频道
+
 export const FETCH_BOOK_DETAIL = 'FETCH_BOOK_DETAIL'            // 获取书籍
-export const FETCH_CATALOGUR = 'FETCH_CATALOGUR'            // 获取目录
-export const FETCH_ALERTSHOW = 'FETCH_ALERTSHOW'            // 重置alert的显示
+export const FETCH_CATALOGUR = 'FETCH_CATALOGUR'                // 获取目录
+export const FETCH_ALERTSHOW = 'FETCH_ALERTSHOW'            	// 重置alert的显示
+export const FETCH_CHANNEL_CLEARN_MAN = 'FETCH_CHANNEL_CLEARN_MAN'         // 清除原有数据
+export const FETCH_CHANNEL_CLEARN_FAMALE = 'FETCH_CHANNEL_CLEARN_FAMALE'   // 清除原有数据
+export const FETCH_READER = 'FETCH_READER'   // 清除原有数据
 
 // mutations types
 export const TOGGLE_PAGETITLE = 'TOGGLE_PAGETITLE'              // 页面标题
@@ -32,33 +36,40 @@ export const TOGGLE_ISSHOWBACK_Y = 'TOGGLE_ISSHOWBACK_Y'        // 显示页面�
 export const TOGGLE_ISSHOWBACK_N = 'TOGGLE_ISSHOWBACK_N'         // 取消显示页面头部返回
 export const TOGGLE_ALERTSHOW_Y = 'TOGGLE_ALERTSHOW_Y'           // 显示消息弹出框
 export const TOGGLE_CATALOGUR = 'TOGGLE_CATALOGUR'               // 显示目录
-export const TOGGLE_ALERT_CONTENT = 'TOGGLE_ALERT_CONTENT'               // 显示目录
-
+export const TOGGLE_ALERT_CONTENT = 'TOGGLE_ALERT_CONTENT'       // 消息弹出框内容
 export const TOGGLE_HOME_LIST = 'TOGGLE_HOME_LIST'              // 主页
 export const TOGGLE_RANK_LIST = 'TOGGLE_RANK_LIST'              // 排行
-export const TOGGLE_RANK_LIST_MORE = 'TOGGLE_RANK_LIST_MORE'              // 排行
-export const TOGGLE_CATEGORY_LIST = 'TOGGLE_CATEGORY_LIST'              // 分类
-export const TOGGLE_CATEGORY_LIST_MORE = 'TOGGLE_CATEGORY_LIST_MORE'              // 分类
-export const TOGGLE_CHANNEL_LIST_MAN = 'TOGGLE_CHANNEL_LIST_MAN'              // 频道
-export const TOGGLE_CHANNEL_LIST_FAMALE = 'TOGGLE_CHANNEL_LIST_FAMALE'              // 频道
-//export const TOGGLE_CHANNEL_LIST_MORE = 'TOGGLE_CHANNEL_LIST_MORE'              // 频道
+export const TOGGLE_RANK_LIST_MORE = 'TOGGLE_RANK_LIST_MORE'    // 排行加载更多
+
+export const TOGGLE_CATEGORY_LIST = 'TOGGLE_CATEGORY_LIST'      // 分类
+export const TOGGLE_CATEGORY_DETAIL = 'TOGGLE_CATEGORY_DETAIL'  // 分类详情
+export const TOGGLE_CATEGORY_LIST_MORE = 'TOGGLE_CATEGORY_LIST_MORE'        // 分类详情加载更多
+export const TOGGLE_CHANNEL_LIST_MAN = 'TOGGLE_CHANNEL_LIST_MAN'            // 频道男
+export const TOGGLE_CHANNEL_LIST_FAMALE = 'TOGGLE_CHANNEL_LIST_FAMALE'      // 频道女
+export const TOGGLE_CHANNEL_CLEARN_MAN = 'TOGGLE_CHANNEL_CLEARN_MAN'        // 清理频道男
+export const TOGGLE_CHANNEL_CLEARN_FAMALE = 'TOGGLE_CHANNEL_CLEARN_FAMALE'  // 清理频道女
 export const TOGGLE_BOOK_DETAIL = 'TOGGLE_BOOK_DETAIL'              // 书籍
+export const TOGGLE_READER = 'TOGGLE_READER'              // 书籍
 
 //  getters types
 export const DONE_LOADING = 'DONE_LOADING'                  // loading
-export const DONE_PAGETITLE = 'DONE_PAGETITLE'                  // 页面标题
-export const DONE_REGISTER_STATE = 'DONE_REGISTER_STATE'                // 注册状态，失败，成功
-export const DONE_ALERTSHOW = 'DONE_ALERTSHOW'                  // 消息提示框状态
+export const DONE_PAGETITLE = 'DONE_PAGETITLE'              // 页面标题
+export const DONE_REGISTER_STATE = 'DONE_REGISTER_STATE'    // 注册状态，失败，成功
+export const DONE_ALERTSHOW = 'DONE_ALERTSHOW'              // 消息提示框状态
 export const DONE_ISSHOWBACK = 'DONE_ISSHOWBACK'            // 返回ICON显示状态
 export const DONE_ISLOGIN = 'DONE_ISLOGIN'                  // 登录状态
-export const DONE_USERINFO = 'DONE_USERINFO'        // 用户信息
-export const DONE_ALERT_CONTENT = 'DONE_ALERT_CONTENT'        // 用户信息
+export const DONE_USERINFO = 'DONE_USERINFO'        		// 用户信息
+export const DONE_ALERT_CONTENT = 'DONE_ALERT_CONTENT'      // 用户信息
 
-export const DONE_HOME_LIST = 'DONE_HOME_LIST'        // 主页
-export const DONE_RANK_LIST = 'DONE_RANK_LIST'        // 排行
-export const DONE_CATEGORY_LIST = 'DONE_CATEGORY_LIST'        // 分类
-export const DONE_CHANNEL_LIST_MAN = 'DONE_CHANNEL_LIST_MAN'        // 频道
-export const DONE_CHANNEL_LIST_FAMALE = 'DONE_CHANNEL_LIST_FAMALE'        // 频道
-export const DONE_BOOK_DETAIL = 'DONE_BOOK_DETAIL'        // 书籍
-export const DONE_CATALOGUR = 'DONE_CATALOGUR'        // 目录
+export const DONE_HOME_LIST = 'DONE_HOME_LIST'        		 // 主页
+export const DONE_RANK_LIST = 'DONE_RANK_LIST'        		 // 排行
+export const DONE_CATEGORY_LIST = 'DONE_CATEGORY_LIST'       // 分类
+export const DONE_CATEGORY_DETAIL = 'DONE_CATEGORY_DETAIL'   // 分类
+export const DONE_CHANNEL_LIST_MAN = 'DONE_CHANNEL_LIST_MAN' // 频道
+export const DONE_CHANNEL_LIST_FAMALE = 'DONE_CHANNEL_LIST_FAMALE' // 频道
+
+
+export const DONE_BOOK_DETAIL = 'DONE_BOOK_DETAIL'           // 书籍
+export const DONE_CATALOGUR = 'DONE_CATALOGUR'        		// 目录
+export const DONE_READER = 'DONE_READER'        		// 目录
 

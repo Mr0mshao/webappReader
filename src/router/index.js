@@ -4,6 +4,7 @@ import Home from '@/views/home'
 import Books from '@/views/book'
 import Rank  from '@/views/rank'
 import Category  from '@/views/category'
+import CategoryDetail  from '@/views/category-detail'
 import Channel  from '@/views/channel'
 import Channel2  from '@/views/channel2'
 import Catalogue  from '@/views/catalogue'
@@ -36,9 +37,13 @@ export default new Router({
     },
 
     {
-    	path:'/category',
-    	name:'category',
-    	component: Category
+        path:'/category',
+        name:'category',
+        component: Category,
+    },{
+    	path:'/categorydetail/:id',
+    	name:'categoryDetail',
+    	component: CategoryDetail
     },
     {
         path:'/book/:id',
@@ -51,7 +56,7 @@ export default new Router({
         component: Catalogue
     },
     {
-    	path:'/reader/:id',
+    	path:'/reader/:bid/:id',
     	name:'reader',
     	component: Reader
     }

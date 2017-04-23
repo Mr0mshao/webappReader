@@ -79,7 +79,9 @@ const actions = {
 				commit(types.TOGGLE_REGISTER, params)
 				commit(types.TOGGLE_ALERT_CONTENT, '成功')	
 			}
-		})
+		}).catch(function (error) {
+		   console.log(error);
+		});
 	},
 
 	[types.FETCH_LOGOUT]({commit}, params){
@@ -88,7 +90,6 @@ const actions = {
 		window.localStorage.removeItem('user');
 	},
 	[types.FETCH_LOGIN_SESSION]({commit},params){
-		state.alertShow = true
 		commit(types.TOGGLE_LOGIN,params)
 	},
 	[types.FETCH_ALERTSHOW]({commit}){

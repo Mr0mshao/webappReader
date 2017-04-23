@@ -18,7 +18,9 @@ const actions = {
 	    }).then((res)=>{
 	      commit(types.TOGGLE_RANK_LIST, res.data)
 	      commit(types.TOGGLE_FINISH_LOADING)
-	    })
+	    }).catch(function (error) {
+		   console.log(error);
+		});
 	},
 	[types.FETCH_RANK_LIST_MORE]({commit},params){
 		axios.get('http://localhost:80/reader-api/v1/rank',{
@@ -27,8 +29,9 @@ const actions = {
 	    }).then((res)=>{
 	      commit(types.TOGGLE_RANK_LIST_MORE, res.data)
 	      commit(types.TOGGLE_FINISH_LOADING)
-	    })
-	 console.log(params)
+	    }).catch(function (error) {
+		   console.log(error);
+		});
 	}
 }
 

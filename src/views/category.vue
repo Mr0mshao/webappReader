@@ -1,15 +1,17 @@
 <template>    
 <div>
-  <layout-list :datalist="DONE_CATEGORY_LIST"></layout-list>
+  <group>
+      <cell v-for="item in DONE_CATEGORY_LIST" :title="item.type | formatType" :link="{name:'categoryDetail',params:{id:item.type}}" :key="item.type"></cell>
+    </group>
 </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import layoutList from '../components/list.vue'
+import {Group, Cell } from 'vux'
 export default {
   name:'category',
-  components: { layoutList },
+  components: { Group, Cell },
   data () {
     return {}
   },

@@ -1,6 +1,5 @@
 <template>    
 <div>
-  <!-- {{DONE_RANK_LIST}} -->
   <layout-list :datalist="DONE_RANK_LIST"></layout-list>
   <x-button type="default" @click.native="loadMore">加载更多...</x-button>
 </div>

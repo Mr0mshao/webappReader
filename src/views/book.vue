@@ -21,10 +21,10 @@
 			<div class="book-detail-btn">
 				<ul class="btn-group">
 					<li class="btn-group-cell">
-                        <router-link class="btn-normal white" to="/rank">开始阅读</router-link>
+                        <router-link class="btn-normal white" :to="{name:'reader',params:{bid:DONE_BOOK_DETAIL.id,id:1}}">开始阅读</router-link>
                     </li>
                     <li class="btn-group-cell">
-						<router-link class="btn-normal red" to="/rank" style="background-color:#fff">继续阅读</router-link>
+						<router-link class="btn-normal red" :to="DONE_ISLOGIN ? '/rank':'' " style="background-color:#fff">{{DONE_ISLOGIN ? '继续阅读':'请先登录'}}</router-link>
 					</li>
 				</ul>
 			</div>
@@ -32,11 +32,10 @@
 	</div>
 		
 	<div class="module module-merge">
-		<section class="book-summary">
+		<section class="book-summary" v-on:click="console" :style="{maxHeight:maxHeight+'rem'}">
 			<content style="display: block">
 				{{DONE_BOOK_DETAIL.description}}
 			</content>
-			<span class="book-summary-more"> *** </span>
 		</section>
 		<router-link :to="{name:'catalogue',params:{id:DONE_BOOK_DETAIL.id}}" class="book-meta book-status">
 			<div class="option">
@@ -60,9 +59,15 @@ export default {
   name:'book',
   components: {},
   data () {
-    return {}
+    return {
+        maxHeight:5.92,
+    }
   },
-  methods: {},
+  methods: {
+    console(){
+        this.maxHeight == 15 ? this.maxHeight=5.92 : this.maxHeight = 15;
+    }
+  },
   mounted: function() {
 		window.scrollTo(0, 0)
 	},
@@ -70,7 +75,7 @@ export default {
 		this.$store.dispatch('FETCH_BOOK_DETAIL', {"id":this.$route.params.id})
 	},
 	computed:{
-		...mapGetters(['DONE_BOOK_DETAIL'])
+		...mapGetters(['DONE_BOOK_DETAIL','DONE_ISLOGIN'])
 	},
 }
 

@@ -4,6 +4,9 @@
     <router-view></router-view>
     <loading v-model="DONE_LOADING"></loading>
     <BackToTop v-show="backBtnShow" @click.native='backToTop'></BackToTop>
+    <footer class="footer-copy">
+      copyright © 2002-2017 m.qidian.com
+    </footer>
   </div>
 </template>
 

@@ -7,6 +7,7 @@ import category from './modules/category.js'
 import channel from './modules/channel.js'
 import book from './modules/book.js'
 import catalogue from './modules/catalogue.js'
+import reader from './modules/reader.js'
 
 
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
 		category,
 		channel,
 		book,
-		catalogue
+		catalogue,
+		reader
 	},
 })

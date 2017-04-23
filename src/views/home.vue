@@ -6,7 +6,7 @@
 		auto
 		loop
 	 >
-		<swiper-item class="swiper-demo-img" v-for="(item, index) in list" :key="index"><img :src="item">
+		<swiper-item class="swiper-demo-img" v-for="item in list" :key="index"><img :src="item">
 		</swiper-item>
 	</swiper>
 	<search 
@@ -22,7 +22,6 @@
 	<flexbox class='home_nav'>
 		<flexbox-item>
 			<router-link :to="{name:'channel',params:{type:1}}" class='routerlink flex-demo'>
-				<!-- <icon type='warn'></icon> -->
 				<img src="../assets/male.png"class="icon">
 				<p>男生</p>
 			</router-link>
