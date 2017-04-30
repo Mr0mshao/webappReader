@@ -22,6 +22,8 @@ export const FETCH_ALERTSHOW = 'FETCH_ALERTSHOW'            	// 重置alert的�
 export const FETCH_CHANNEL_CLEARN_MAN = 'FETCH_CHANNEL_CLEARN_MAN'         // 清除原有数据
 export const FETCH_CHANNEL_CLEARN_FAMALE = 'FETCH_CHANNEL_CLEARN_FAMALE'   // 清除原有数据
 export const FETCH_READER = 'FETCH_READER'   // 清除原有数据
+export const FETCH_SEARCH = 'FETCH_SEARCH'   // 清除原有数据
+export const FETCH_ADMIN = 'FETCH_ADMIN'   // 清除原有数据
 
 // mutations types
 export const TOGGLE_PAGETITLE = 'TOGGLE_PAGETITLE'              // 页面标题
@@ -50,6 +52,8 @@ export const TOGGLE_CHANNEL_CLEARN_MAN = 'TOGGLE_CHANNEL_CLEARN_MAN'        // �
 export const TOGGLE_CHANNEL_CLEARN_FAMALE = 'TOGGLE_CHANNEL_CLEARN_FAMALE'  // 清理频道女
 export const TOGGLE_BOOK_DETAIL = 'TOGGLE_BOOK_DETAIL'              // 书籍
 export const TOGGLE_READER = 'TOGGLE_READER'              // 书籍
+export const TOGGLE_SEARCH_RESULT = 'TOGGLE_SEARCH_RESULT'              // 书籍
+export const TOGGLE_ADMIN = 'TOGGLE_ADMIN'              // 书籍
 
 //  getters types
 export const DONE_LOADING = 'DONE_LOADING'                  // loading
@@ -72,4 +76,6 @@ export const DONE_CHANNEL_LIST_FAMALE = 'DONE_CHANNEL_LIST_FAMALE' // 频道
 export const DONE_BOOK_DETAIL = 'DONE_BOOK_DETAIL'           // 书籍
 export const DONE_CATALOGUR = 'DONE_CATALOGUR'        		// 目录
 export const DONE_READER = 'DONE_READER'        		// 目录
+export const DONE_SEARCH_RESULT = 'DONE_SEARCH_RESULT'        		// 目录
+export const DONE_ADMIN = 'DONE_ADMIN'        		// 目录
 

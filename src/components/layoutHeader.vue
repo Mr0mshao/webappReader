@@ -103,7 +103,7 @@
         </x-dialog>
       </div>
       <div v-transfer-dom>
-        <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-show="onShow" @on-hide="onHide">{{DONE_ALERT_CONTENT}}</alert>
+        <alert v-model="DONE_ALERTSHOW" :title='alertTitle'>{{DONE_ALERT_CONTENT}}</alert>
       </div>
 
     </div>
@@ -183,9 +183,6 @@ export default {
     onHide () {
       console.log('on hide')
       this.$store.dispatch('FETCH_ALERTSHOW')
-    },
-    onShow () {
-      console.log('on show')
     },
   },
 }

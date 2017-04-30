@@ -8,6 +8,7 @@ import channel from './modules/channel.js'
 import book from './modules/book.js'
 import catalogue from './modules/catalogue.js'
 import reader from './modules/reader.js'
+import admin from './modules/admin.js'
 
 
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
 		channel,
 		book,
 		catalogue,
-		reader
+		reader,
+		admin
 	},
 })

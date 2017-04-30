@@ -5,7 +5,6 @@
     </group>
 </div>
 </template>
-
 <script>
 import { mapGetters } from 'vuex'
 import {Group, Cell } from 'vux'
@@ -24,9 +23,6 @@ export default {
     ...mapGetters(['DONE_CATEGORY_LIST','FETCH_CATEGORY_LIST'])
   }
 }
-
 </script>
-
 <style>
-	
 </style>

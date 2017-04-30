@@ -10,6 +10,8 @@ const state = {
 	alertShow:false,
 	pageTitle:'我的书城',
 	alertContent:'',
+	searchResult:[],
+	_data:{},
 }
 const getters = {
 	[types.DONE_LOADING]:state => state.loading,
@@ -20,6 +22,7 @@ const getters = {
 	[types.DONE_ALERTSHOW]:state => state.alertShow,
 	[types.DONE_PAGETITLE]:state => state.pageTitle,
 	[types.DONE_ALERT_CONTENT]:state => state.alertContent,
+	[types.DONE_SEARCH_RESULT]:state => state.searchResult,
 }
 
 const actions = {
@@ -83,7 +86,27 @@ const actions = {
 		   console.log(error);
 		});
 	},
-
+	[types.FETCH_SEARCH]({commit}, params){
+		axios({
+			method:'post',
+			url: 'http://localhost:80/reader-api/v1/search',
+			data:params,
+			transformRequest:[ function (data){
+				let ret = '';
+				for(let it in data){
+					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+				}
+				return ret;
+			}],
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).then((res)=>{
+			if(res.data.msg == 'ok'){
+				commit(types.TOGGLE_SEARCH_RESULT,res.data.data);
+			}
+		}).catch(function (error) {
+		   console.log(error);
+		});
+	},
 	[types.FETCH_LOGOUT]({commit}, params){
 		commit(types.TOGGLE_LOGOUT)
 		state.alertShow = false
@@ -150,6 +173,9 @@ const mutations = {
 	[types.TOGGLE_ALERT_CONTENT](stata, str){
 		state.alertShow = true
 		state.alertContent = str
+	},
+	[types.TOGGLE_SEARCH_RESULT](stata, all){
+		state.searchResult = all
 	}
 
 }

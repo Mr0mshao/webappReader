@@ -5,7 +5,7 @@
     <loading v-model="DONE_LOADING"></loading>
     <BackToTop v-show="backBtnShow" @click.native='backToTop'></BackToTop>
     <footer class="footer-copy">
-      copyright © 2002-2017 m.qidian.com
+      copyright © 2002-2017 www.mr-mshao.sapce
     </footer>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
       this.backBtnShow = false
     }
   },
-  created(){
+  mounted(){
     setInterval(()=>{
       if(window.scrollY > 650){
           this.backBtnShow = true

@@ -6,18 +6,18 @@
 		auto
 		loop
 	 >
-		<swiper-item class="swiper-demo-img" v-for="item in list" :key="index"><img :src="item">
+		<swiper-item class="swiper-demo-img" v-for="(item,index) in list" :key="index"><img :src="item">
 		</swiper-item>
 	</swiper>
 	<search 
-		@result-click="resultClick" 
-		:results="results" 
-		v-model="value" 
-		position="absolute"
 		auto-scroll-to-top top="46px" 
-		@on-submit="onSubmit"
+		position="absolute"
 		cancel-text="取消"
 		placeholder="请输入关键词"
+		:results="DONE_SEARCH_RESULT"
+		@on-submit="onSubmit"
+		@on-cancel="sShow = false"
+		@on-result-click="resultClick"
 	></search>
 	<flexbox class='home_nav'>
 		<flexbox-item>
@@ -45,10 +45,10 @@
 			</router-link>
 		</flexbox-item>
 	</flexbox>
-
 	<Hot :listData="DONE_HOME_LIST.hot"></Hot>
 	<Rank :listData='DONE_HOME_LIST.rank'></Rank>
 	<Category :listData='DONE_HOME_LIST.category'></Category>
+	<Categorys :listData='DONE_HOME_LIST.categorys'></Categorys>
 	<Channel :listData='DONE_HOME_LIST.channel'></Channel>
 </div>
 </template>
@@ -57,6 +57,7 @@
 import {Swiper,SwiperItem,Search,Tab,TabItem,Flexbox, FlexboxItem,Icon} from 'vux'
 import Rank from '../components/rank.vue'
 import Category from '../components/category.vue'
+import Categorys from '../components/category2.vue'
 import Channel from '../components/channel.vue'
 import Hot  from '../components/hot.vue'
 
@@ -65,40 +66,37 @@ const imgList = [
   'http://qidian.qpic.cn/qidian_common/349573/37f39e9a422bdf33676511861a70d947/0',
   'http://qidian.qpic.cn/qidian_common/349573/069ee39f58d1aa4b214c75f01cc4192d/0',
   'http://qidian.qpic.cn/qidian_common/349573/78522f7f537312a67e4d79fd4e475a10/0',
-  'http://qidian.qpic.cn/qidian_common/349573/18cf119c9257474ad9f274b5ca984333/0'
+  'http://qidian.qpic.cn/qidian_common/349573/18cf119c9257474ad9f274b5ca984333/0',
+  'http://qidian.qpic.cn/qidian_common/349573/674ec876a92fcdb9c2a03c7f96d53c1f/0'
 ]
 export default {
   name:'home',
   components: { Swiper ,SwiperItem,Search,Tab, TabItem, Flexbox, FlexboxItem,
-  	Rank,Category,Channel,Hot,Icon
+  	Rank,Category,Channel,Hot,Icon,Categorys
   },
   data () {
     return {
     	list: imgList,
     	results: [],
     	value: null,
-    	isShow:true, 	
+    	isShow:true,
+    	sShow:false, 	
     }
   },
   methods: {
     resultClick (item) {
-      window.alert('you click the result item: ' + JSON.stringify(item))
+      this.$router.push({ name: 'book', params: { id: item.id }})
     },
     onSubmit (item) {
-    	console.log(item);
-    },
-    getHomeData(){
-    	this.$store.dispatch('FETCH_HOME_LIST')
+    	this.$store.dispatch('FETCH_SEARCH',{'key':item})	
     },
   },
   created(){
-   	this.getHomeData()
+   	this.$store.dispatch('FETCH_HOME_LIST')
   },
-
-computed:{
-   ...mapGetters(['DONE_HOME_LIST','DONE_HOME_LOADING'])
-},
-  
+	computed:{
+	   ...mapGetters(['DONE_HOME_LIST','DONE_HOME_LOADING','DONE_SEARCH_RESULT'])
+	}
 }
 </script>
 
@@ -180,4 +178,5 @@ computed:{
 	.swiper-demo-img img {
 	  width: 100%;
 	}
+	
 </style>

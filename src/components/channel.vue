@@ -10,13 +10,7 @@
 				女生
 			</span>
 		</div>
-		<!-- <span class="more">
-			<router-link to="/channel" class="module-header-btn">
-				更多 >
-			</router-link>
-		</span> -->
 	</div>
-
 	<swiper v-model='index' :show-dots="false" height="456px">
 		<swiper-item :key='index' v-for="item in listData">
 			<div class="book-ol book-ol-normal">
@@ -148,10 +142,14 @@ ol{
 
 }
 .footer-copy {
+	position: fixed;
+	bottom: 0;
+	height: 46px;
+	line-height: 46px;
+	width: 100%;
     font-size: .75rem;
     font-weight: 300;
     padding-top: .25rem;
-    padding-bottom: 1rem;
     text-align: center;
     color: #969ba3;
 }

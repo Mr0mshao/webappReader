@@ -9,12 +9,15 @@ import Channel  from '@/views/channel'
 import Channel2  from '@/views/channel2'
 import Catalogue  from '@/views/catalogue'
 import Reader  from '@/views/reader'
+import Admin  from '@/views/admin'
+
 
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'hash',
+  base: __dirname,
   routes: [
     {
       path: '/',
@@ -59,6 +62,11 @@ export default new Router({
     	path:'/reader/:bid/:id',
     	name:'reader',
     	component: Reader
+    },
+    {
+        path:'/admin',
+        name:'admin',
+        component:Admin
     }
   ]
 })
