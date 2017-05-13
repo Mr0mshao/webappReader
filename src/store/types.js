@@ -8,6 +8,7 @@ export const FETCH_LOGIN = 'FETCH_LOGIN'                		// 登录
 export const FETCH_LOGIN_SESSION = 'FETCH_LOGIN_SESSION'        // session登录
 export const FETCH_LOGOUT = 'FETCH_LOGOUT'                      // 注销
 export const FETCH_REGISTER = 'FETCH_REGISTER'                  // 注册
+export const FETCH_ALERT_CONTENT = 'FETCH_ALERT_CONTENT'                  // 注册
 export const FETCH_HOME_LIST = 'FETCH_HOME_LIST'                // 获取主页数据列表
 export const FETCH_RANK_LIST = 'FETCH_RANK_LIST'                // 获取排行
 export const FETCH_RANK_LIST_MORE = 'FETCH_RANK_LIST_MORE'      // 加载更多
@@ -23,7 +24,8 @@ export const FETCH_CHANNEL_CLEARN_MAN = 'FETCH_CHANNEL_CLEARN_MAN'         // �
 export const FETCH_CHANNEL_CLEARN_FAMALE = 'FETCH_CHANNEL_CLEARN_FAMALE'   // 清除原有数据
 export const FETCH_READER = 'FETCH_READER'   // 清除原有数据
 export const FETCH_SEARCH = 'FETCH_SEARCH'   // 清除原有数据
-export const FETCH_ADMIN = 'FETCH_ADMIN'   // 清除原有数据
+
+export const FETCH_RECORD = 'FETCH_RECORD'   // 清除原有数据
 
 // mutations types
 export const TOGGLE_PAGETITLE = 'TOGGLE_PAGETITLE'              // 页面标题
@@ -53,7 +55,8 @@ export const TOGGLE_CHANNEL_CLEARN_FAMALE = 'TOGGLE_CHANNEL_CLEARN_FAMALE'  // �
 export const TOGGLE_BOOK_DETAIL = 'TOGGLE_BOOK_DETAIL'              // 书籍
 export const TOGGLE_READER = 'TOGGLE_READER'              // 书籍
 export const TOGGLE_SEARCH_RESULT = 'TOGGLE_SEARCH_RESULT'              // 书籍
-export const TOGGLE_ADMIN = 'TOGGLE_ADMIN'              // 书籍
+export const TOGGLE_LOGIN_L = 'TOGGLE_LOGIN_L'              // 书籍
+export const TOGGLE_USERINFO = 'TOGGLE_USERINFO'              // 书籍
 
 //  getters types
 export const DONE_LOADING = 'DONE_LOADING'                  // loading
@@ -77,5 +80,4 @@ export const DONE_BOOK_DETAIL = 'DONE_BOOK_DETAIL'           // 书籍
 export const DONE_CATALOGUR = 'DONE_CATALOGUR'        		// 目录
 export const DONE_READER = 'DONE_READER'        		// 目录
 export const DONE_SEARCH_RESULT = 'DONE_SEARCH_RESULT'        		// 目录
-export const DONE_ADMIN = 'DONE_ADMIN'        		// 目录
 

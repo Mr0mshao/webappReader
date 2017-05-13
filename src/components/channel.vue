@@ -30,7 +30,7 @@
 									<span>
 										<em class="book-meta-icon">{{i.type | formatType}}</em>
 										<em class="book-meta-icon red">{{i.status === '1' ? '完本' : '连载' }}</em>
-										<em class="book-meta-icon info">{{i.wordcount}}千字</em>
+										<!-- <em class="book-meta-icon info">{{i.wordcount}}万字</em> -->
 									</span>
 								</div>
 							</div>
@@ -142,14 +142,12 @@ ol{
 
 }
 .footer-copy {
-	position: fixed;
-	bottom: 0;
 	height: 46px;
 	line-height: 46px;
 	width: 100%;
     font-size: .75rem;
     font-weight: 300;
-    padding-top: .25rem;
+    padding-top: 4px;
     text-align: center;
     color: #969ba3;
 }

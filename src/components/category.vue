@@ -26,7 +26,7 @@
 					<div  v-for="(i, idx) in item" class="cate-box">
 						<router-link :to="{name:'book',params:{id:i.id}}">
 							<img :src="i.url" style="width: 66px;height88px;">
-			        		<figcaption class="slide-caption">{{i.name}}</figcaption>
+			        		<figcaption class="slide-caption" style="text-align: left">{{i.name}}</figcaption>
 			        		<p class="slide-author">{{i.author}}</p>
 						</router-link>
 					</div>
@@ -76,7 +76,7 @@ export default {
 	width: 82px;
 	display:inline-block;
 	float: left;
-	text-align: center;
+	text-align: right;
 	overflow: hidden;
 }
 figcaption.slide-caption{

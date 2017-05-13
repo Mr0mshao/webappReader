@@ -1,6 +1,5 @@
 <template>    
     <div>
-
       <x-header 
         :left-options="{backText: '',showBack:isShowBack}"
         :right-options="{showMore:false}"
@@ -13,12 +12,11 @@
         {{DONE_USERINFO.nickName}} <span style="color: #f60">|</span> <span @click="logout">注销</span>
         </span>
       </x-header>
-
       <div v-transfer-dom>
         <x-dialog v-model="showXdialog" :hideOnBlur="true">
           <p class="dialog-title">登录</p>
           <div class="dialog-content">
-            <group>
+            <group gutter="0">
               <x-input 
               title="账 户：" 
               placeholder="请输入账户" 
@@ -36,8 +34,8 @@
             </group>
           </div>
           <div class="btn">
-            <span class="dialog-btn dialog-confir" @click="getValue">确认</span>
-            <span class="dialog-btn dialog-close" @click="showXdialog = false">取消</span>
+            <button class="dialog-btn dialog-confir" @click="getValue" v-on:keyup.enter="getValue">确认</button>
+            <button class="dialog-btn dialog-close" @click="showXdialog = false">取消</button>
           </div>
         </x-dialog>
       </div>
@@ -45,7 +43,7 @@
         <x-dialog v-model="showReginster" :hideOnBlur="true">
           <p class="dialog-title">注册</p>
           <div class="dialog-content">
-            <group>
+            <group gutter="0">
               <x-input 
                 placeholder="请输入账户" 
                 type="text"
@@ -73,7 +71,7 @@
                 v-model="registerInfo.nickName"
                 :required="true"
               >
-<img slot="label" style="padding-right:10px;display:block;" src="../assets/email.png" width="24" height="24">
+<img slot="label" style="padding-right:10px;display:block;" src="../assets/nicheng2.png" width="24" height="24">
               </x-input>
               <x-input 
                 title="密 码：" 
@@ -97,13 +95,13 @@
             </group>
           </div>
           <div class="btn">
-            <span class="dialog-btn dialog-confir" @click="getRegValue">确认</span>
-            <span class="dialog-btn dialog-close" @click="showReginster = false">取消</span>
+            <button class="dialog-btn dialog-confir" @click="getRegValue">确认</button>
+            <button class="dialog-btn dialog-close" @click="showReginster = false">取消</button>
           </div>
         </x-dialog>
       </div>
       <div v-transfer-dom>
-        <alert v-model="DONE_ALERTSHOW" :title='alertTitle'>{{DONE_ALERT_CONTENT}}</alert>
+        <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-hide="onHide">{{DONE_ALERT_CONTENT}}</alert>
       </div>
 
     </div>
@@ -148,12 +146,14 @@ export default {
   methods:{
     getValue(){
       console.log(this.loginInfo);
-      if( this.loginInfo.username && this.loginInfo.password ){
+      if( this.loginInfo.username && this.loginInfo.password && this.loginInfo.username.length>5){
         this.alertTitle = '登录'
         this.showXdialog = false;
         this.login(this.loginInfo)
       }else{
-        alert('请输入完整')
+        this.showXdialog = false;
+        // alert('请输入合法的帐号或密码')
+        this.$store.dispatch('FETCH_ALERT_CONTENT','请输入合法的帐号或密码')
         return false
       }
     },
@@ -161,10 +161,11 @@ export default {
       console.log(this.registerInfo);
       if(this.registerInfo.username && this.registerInfo.password && this.registerInfo.nickName && this.registerInfo.confirPassword && this.registerInfo.email ){
         this.alertTitle = '注册'
-        this.showReginster = false;
         this.register(this.registerInfo)
+        this.showReginster = false;
       }else{
-        alert('请输入完整')
+        this.showReginster = false;
+        this.$store.dispatch('FETCH_ALERT_CONTENT','请输入合法的字段')
         return false
       }
 
@@ -192,13 +193,14 @@ export default {
   border-radius: 8px;
 }
 .dialog-title {
-  line-height: 30px;
+  height: 35px;
+  line-height: 35px;
   color: #666;
+  font-size: 20px;
+  padding: 7px 0;
 }
 .dialog-content{
-  height: 263px;
   overflow: hidden;
-  
   position: relative;
 }
 .dialog-btn {
@@ -206,9 +208,14 @@ export default {
   padding-top: 8px;
   padding-bottom: 8px;
   width: 48%;
+  font-size: 16px;
+  border:none;
+  background: none;
+  color: red;
 }
 .dialog-confir{
   border-right: 1px solid #999;
+  color: green;
 }
 .register{
   position: absolute;

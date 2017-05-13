@@ -54,7 +54,6 @@ const mutations = {
 		// all.category.tt = state.tt;
 		// all.category.bb = state.bb;
 		state.homeList = all
-		console.log(state.homeList)
 	}
 }
 

@@ -39,6 +39,29 @@ const actions = {
 		   console.log(error);
 		});
 
+	},
+	[types.FETCH_RECORD]({commit},params){
+		axios({
+		  url: 'http://localhost:80/reader-api/v1/ur',
+		  method: 'post',
+		  data: params,
+		  transformRequest: [function (data) {	
+		    let ret = ''
+		    for (let it in data) {
+		      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+		    }
+		    return ret
+		  }],
+		  headers: {
+		    'Content-Type': 'application/x-www-form-urlencoded'
+		  }
+		}).then((res)=>{
+			if(res.data.msg == 'ok'){
+				commit(types.TOGGLE_USERINFO,params.ur);
+			}
+		}).catch(function (error) {
+		   console.log(error);
+		});
 	}
 }
 

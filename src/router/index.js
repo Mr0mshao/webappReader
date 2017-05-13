@@ -9,7 +9,8 @@ import Channel  from '@/views/channel'
 import Channel2  from '@/views/channel2'
 import Catalogue  from '@/views/catalogue'
 import Reader  from '@/views/reader'
-import Admin  from '@/views/admin'
+import Admin  from '@/admin/admin'
+import Booklist from '@/admin/booklist'
 
 
 
@@ -67,6 +68,11 @@ export default new Router({
         path:'/admin',
         name:'admin',
         component:Admin
+    },
+    {
+        path:'/admin/:id',
+        name:'booklist',
+        component:Booklist
     }
   ]
 })

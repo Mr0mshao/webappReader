@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-  	<layoutHeader :isShowBack='DONE_ISSHOWBACK'></layoutHeader>
-    <router-view></router-view>
-    <loading v-model="DONE_LOADING"></loading>
-    <BackToTop v-show="backBtnShow" @click.native='backToTop'></BackToTop>
-    <footer class="footer-copy">
-      copyright © 2002-2017 www.mr-mshao.sapce
-    </footer>
+  	<div style="min-height: calc(100% - 50px)">
+      <layoutHeader :isShowBack='DONE_ISSHOWBACK'></layoutHeader>
+      <router-view></router-view>
+      <loading v-model="DONE_LOADING"></loading>
+      <BackToTop v-show="backBtnShow" @click.native='backToTop'></BackToTop> 
+      <footer class="footer-copy">
+        copyright © 2002-2017 www.mr-mshao.sapce
+      </footer>
+    </div>
+    
   </div>
 </template>
 

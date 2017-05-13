@@ -1,7 +1,7 @@
 <template>    
   <div style="font-size: 16px;">
     <div v-html="DONE_READER" :style="contentBox" class="content-box"></div>
-    <flexbox style="padding: 20px 0 2rem 0">
+    <flexbox>
       <flexbox-item style="text-align: center">
         <button type="button" class="rbtn white flex-demo" @click="prevPage">上一章</button>
       </flexbox-item>
@@ -14,7 +14,7 @@
     <!-- 底部菜单 -->
     <div class="bottom-nav-bk bottom_nav" v-show="menuShow"></div>
     <div class="bottom-nav bottom_nav" v-show="menuShow">
-      <div class="item">
+      <div class="item" @click="mulu">
         <div class="item-warp">
           <div class="icon-menu"></div>
           <div class="icon-text">目录</div>
@@ -43,6 +43,7 @@
       <div class="child-mod">
         <span>字号</span>
         <button class="spe-button" type="button" @click="changeFontSize('s')">小</button>
+        <span class="spe-button-noborder">{{fSize}}</span>
         <button class="spe-button" type="button" style="margin-left: 10px" @click="changeFontSize('b')">大</button>
       </div>
       <div class="child-mod">
@@ -84,17 +85,28 @@
         fSize:18,
         menuShow:false,
         fsMenuShow:false,
+        scroll:'',
       }
     },
     methods: {
       nextPage(){
         this.$store.dispatch('FETCH_READER',{"id":this.$route.params.bid,"p":++this.page});
+        this.$store.dispatch('FETCH_RECORD',{
+          "ur":`${this.$route.params.bid}#${this.page}`,
+          "uid":this.DONE_USERINFO.id,
+        })
+        window.scrollTo(0,0)
       },
       prevPage(){
         if(this.page <= 1){
           return false
         }else{
           this.$store.dispatch('FETCH_READER',{"id":this.$route.params.bid,"p":--this.page});
+          this.$store.dispatch('FETCH_RECORD',{
+          "ur":`${this.$route.params.bid}#${this.page}`,
+          "uid":this.DONE_USERINFO.id,
+        })
+          window.scrollTo(0,0)
         }
       },
       changeMode(){
@@ -126,24 +138,32 @@
         }
         this.storeOptions()
       },
-      scrollToTop(){
-        window.scrollTo(0,0)
-      },
       storeOptions(){
         window.localStorage.setItem('readerOptions',JSON.stringify(this.contentBox));
+      },
+      mulu(){
+        let bid = this.$route.params.bid;
+        this.$router.push({name:'catalogue',params:{id:bid}})
+      },
+      scorllFn(){
+        this.menuShow = false
       }
     },
     created(){
       this.$store.dispatch('FETCH_READER',{"id":this.$route.params.bid,"p":this.$route.params.id});
       //获取阅读模式
-      this.contentBox = JSON.parse(window.localStorage.getItem('readerOptions')) || this.contentBox;
+      if(this.DONE_ISLOGIN){
+        this.contentBox = JSON.parse(window.localStorage.getItem('readerOptions')) || this.contentBox
+      }
+
     },
 
     mounted(){
       window.scrollTo(0,0)
+      window.addEventListener('scroll', this.scorllFn)
     },
     computed:{
-      ...mapGetters(['DONE_READER'])
+      ...mapGetters(['DONE_READER','DONE_ISLOGIN','DONE_USERINFO'])
 
     }
   }
@@ -294,6 +314,12 @@
     color: #fff;
     display: inline-block;
     border-radius: 16px;
+  }
+  .spe-button-noborder{
+    background: none;
+    padding: 5px 40px;
+    color: #fff;
+    display: inline-block;
   }
   .bk-container {
     position: relative;

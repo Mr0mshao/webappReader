@@ -51,7 +51,7 @@ const actions = {
 			}else if(res.data.msg === 'error'){
 				console.log(res.data.data)
 				commit(types.TOGGLE_LOGIN_FAILURE)
-				commit(types.TOGGLE_ALERT_CONTENT, '失败')
+				commit(types.TOGGLE_ALERT_CONTENT, '失败！密码或帐号错误')
 			}
 	    }).catch(function (error) {
 		   console.log(error);
@@ -79,7 +79,7 @@ const actions = {
 				commit(types.TOGGLE_ALERT_CONTENT, res.data.msg)
 				commit(types.TOGGLE_REGISTER_FAILED, res.data.data)
 			}else if(res.data.status == 'ok'){
-				commit(types.TOGGLE_REGISTER, params)
+				commit(types.TOGGLE_REGISTER)
 				commit(types.TOGGLE_ALERT_CONTENT, '成功')	
 			}
 		}).catch(function (error) {
@@ -113,19 +113,25 @@ const actions = {
 		window.localStorage.removeItem('user');
 	},
 	[types.FETCH_LOGIN_SESSION]({commit},params){
-		commit(types.TOGGLE_LOGIN,params)
+		commit(types.TOGGLE_LOGIN_L,params)
 	},
 	[types.FETCH_ALERTSHOW]({commit}){
 		state.alertShow = false
 	},
-	
-	
+	[types.FETCH_ALERT_CONTENT]({commit},str){
+		commit(types.TOGGLE_ALERT_CONTENT,str)
+	}
 }
 
 const mutations = {
 	[types.TOGGLE_LOGIN](state, all){
 		state.userInfo = all
 		state.alertShow = true
+		state.isLogin = true
+		state.loading = false
+	},
+	[types.TOGGLE_LOGIN_L](state, all){
+		state.userInfo = all
 		state.isLogin = true
 		state.loading = false
 	},
@@ -136,9 +142,9 @@ const mutations = {
 		state.loading = false
 	},
 	[types.TOGGLE_REGISTER](state, all){
-		state.userInfo = all
+		// state.userInfo = all
 		state.alertShow = true
-		state.isLogin = true
+		state.isLogin = false
 		state.loading = false
 	},
 	[types.TOGGLE_REGISTER_FAILED](state, all){
@@ -176,6 +182,10 @@ const mutations = {
 	},
 	[types.TOGGLE_SEARCH_RESULT](stata, all){
 		state.searchResult = all
+	},
+	[types.TOGGLE_USERINFO](state,all){
+		state.userInfo.recently = all
+		window.localStorage.setItem('user',JSON.stringify(state.userInfo))
 	}
 
 }

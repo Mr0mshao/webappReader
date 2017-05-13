@@ -14,6 +14,7 @@
 		position="absolute"
 		cancel-text="取消"
 		placeholder="请输入关键词"
+		v-model="keyWords"
 		:results="DONE_SEARCH_RESULT"
 		@on-submit="onSubmit"
 		@on-cancel="sShow = false"
@@ -21,17 +22,18 @@
 	></search>
 	<flexbox class='home_nav'>
 		<flexbox-item>
-			<router-link :to="{name:'channel',params:{type:1}}" class='routerlink flex-demo'>
-				<img src="../assets/male.png"class="icon">
-				<p>男生</p>
-			</router-link>
-		</flexbox-item>
-		<flexbox-item>
 			<router-link :to="{name:'channel2',params:{type:0}}" class='routerlink flex-demo'>
 				<img src="../assets/famale.png"class="icon">
 				<p>女生</p>
 			</router-link>
 		</flexbox-item>
+		<flexbox-item>
+			<router-link :to="{name:'channel',params:{type:1}}" class='routerlink flex-demo'>
+				<img src="../assets/male.png"class="icon">
+				<p>男生</p>
+			</router-link>
+		</flexbox-item>
+		
 		<flexbox-item>
 			<router-link to='/category' class='routerlink flex-demo'>
 				<img class="icon" src="../assets/category.png"></img>
@@ -80,15 +82,17 @@ export default {
     	results: [],
     	value: null,
     	isShow:true,
-    	sShow:false, 	
+    	sShow:false,
+    	keyWords:'', 	
     }
   },
   methods: {
     resultClick (item) {
       this.$router.push({ name: 'book', params: { id: item.id }})
     },
-    onSubmit (item) {
-    	this.$store.dispatch('FETCH_SEARCH',{'key':item})	
+    onSubmit () {
+    	this.$store.dispatch('FETCH_SEARCH',{'key':this.keyWords})
+    	this.keyWords = ''	
     },
   },
   created(){

@@ -1,55 +1,53 @@
 <template> 
-<div style="font-size: 16px;">
-	<div class="module-merge module-detail-x" style="background: rgba(0,0,0,0.3) url('../assets/546e3556cce4ad7673e512cf0b4672c0.jpg') center center no-repeat no-repeat">
-		<div class="book-detail-info">
-			<div class="book-layout">
-				<img class="book-cover" :src="DONE_BOOK_DETAIL.url"></img>
-				<div class="book-cell">
-					<h2 class="book-title">{{DONE_BOOK_DETAIL.name}}</h2>
-					<div class="book-rand-a">作者：{{DONE_BOOK_DETAIL.author}}</div>
-					<div class="book-score">类型：{{DONE_BOOK_DETAIL.type | formatType}}</div>
-					<p class="book-meta">关键字：{{DONE_BOOK_DETAIL.keywords}}</p>
-					<p class="book-meta">
-						状态：{{DONE_BOOK_DETAIL.wordcount}}千字
-						<span class="char-pipe">|</span>
-						<span class="red">{{DONE_BOOK_DETAIL.status == 0 ? '连载' : '完本'}}</span>
-					</p>
-                    <p class="book-meta">上架时间：{{DONE_BOOK_DETAIL.createtime | formatDate}}</p>
-				</div>
-			</div>
-			<div class="book-detail-btn">
-				<ul class="btn-group">
-					<li class="btn-group-cell">
-                        <router-link class="btn-normal white" :to="{name:'reader',params:{bid:DONE_BOOK_DETAIL.id,id:1}}">开始阅读</router-link>
-                    </li>
-                    <li class="btn-group-cell">
-						<router-link class="btn-normal red" :to="DONE_ISLOGIN ? '/rank':'' " style="background-color:#fff">{{DONE_ISLOGIN ? '继续阅读':'请先登录'}}</router-link>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-		
-	<div class="module module-merge">
-		<section class="book-summary" v-on:click="console" :style="{maxHeight:maxHeight+'rem'}">
-			<div>
-				{{DONE_BOOK_DETAIL.description}}
-			</div>
-		</section>
-		<router-link :to="{name:'catalogue',params:{id:DONE_BOOK_DETAIL.id}}" class="book-meta book-status">
-			<div class="option">
-				<div class="book-meta-l">
-					<strong class="book-spt">目录</strong>
-				</div>
-				<div class="book-meta-r">
-					<p class="gray ell">
-						连载至125章巨鹰
-					</p>
-				</div>
-			</div>
-		</router-link>
-	</div>
-</div>   
+    <div style="font-size: 16px;">
+    	<div class="module-merge module-detail-x module-detail-x-bg">
+    		<div class="book-detail-info">
+    			<div class="book-layout">
+    				<img class="book-cover" :src="DONE_BOOK_DETAIL.url"></img>
+    				<div class="book-cell">
+    					<h2 class="book-title">{{DONE_BOOK_DETAIL.name}}</h2>
+    					<div class="book-rand-a">作者：{{DONE_BOOK_DETAIL.author}}</div>
+    					<div class="book-score">类型：{{DONE_BOOK_DETAIL.type | formatType}}</div>
+    					<p class="book-meta">关键字：{{DONE_BOOK_DETAIL.keywords}}</p>
+    					<p class="book-meta">
+    						状态：{{DONE_BOOK_DETAIL.wordcount}}千字
+    						<span class="char-pipe">|</span>
+    						<span class="red">{{DONE_BOOK_DETAIL.status == 0 ? '连载' : '完本'}}</span>
+    					</p>
+                        <p class="book-meta">上架时间：{{DONE_BOOK_DETAIL.createtime | formatDate}}</p>
+    				</div>
+    			</div>
+    			<div class="book-detail-btn">
+    				<ul class="btn-group">
+    					<li class="btn-group-cell">
+                            <router-link class="btn-normal white" :to="{name:'reader',params:{bid:DONE_BOOK_DETAIL.id,id:1}}">开始阅读</router-link>
+                        </li>
+                        <li class="btn-group-cell">
+    						<router-link :to="record" class="btn-normal red"  style="background-color:#fff">{{tt}}</router-link>
+    					</li>
+    				</ul>
+    			</div>
+    		</div>
+    	</div>
+    		
+    	<div class="module module-merge">
+    		<section class="book-summary" v-on:click="console" :style="{maxHeight:maxHeight+'rem'}">
+    			<div>
+    				{{DONE_BOOK_DETAIL.description}}
+    			</div>
+    		</section>
+    		<router-link :to="{name:'catalogue',params:{id:DONE_BOOK_DETAIL.id}}" class="book-meta book-status">
+    			<div class="option">
+    				<div class="book-meta-l">
+    					<strong class="book-spt">目录</strong>
+    				</div>
+    				<div class="book-meta-r">
+    					<p class="gray ell"></p>
+    				</div>
+    			</div>
+    		</router-link>
+    	</div>
+    </div>   
 </template>
 
 <script>
@@ -59,21 +57,55 @@ export default {
   data () {
     return {
         maxHeight:5.92,
+        record:'',
     }
   },
   methods: {
     console(){
         this.maxHeight == 15 ? this.maxHeight=5.92 : this.maxHeight = 15;
+    },
+    record(){
+        if(this.DONE_ISLOGIN){
+            let arr = this.DONE_USERINFO.recently.split('#');
+            if(arr[0] == this.$route.params.id){
+                this.$router.push({
+                    name:'reader',
+                    params:{bid:arr[0],id:arr[1]}
+                })
+            }else{
+
+            }
+            
+        }
     }
   },
-  mounted: function() {
-		window.scrollTo(0, 0)
+  mounted() {
+    window.scrollTo(0, 0)
 	},
 	created: function() {
 		this.$store.dispatch('FETCH_BOOK_DETAIL', {"id":this.$route.params.id})
 	},
 	computed:{
-		...mapGetters(['DONE_BOOK_DETAIL','DONE_ISLOGIN'])
+		...mapGetters(['DONE_BOOK_DETAIL','DONE_ISLOGIN','DONE_USERINFO']),
+        tt:function(){
+            if(this.DONE_ISLOGIN){
+                let arr = this.DONE_USERINFO.recently.split('#');
+                if(arr[0] == this.$route.params.id){
+                    this.record = {
+                        name:'reader',
+                        params:{bid:arr[0],id:arr[1]}
+                    }
+                    return '继续阅读'
+                }else{
+                    this.record = '';
+                    return '暂无记录'
+                }
+
+            }else{
+                this.record = '';
+                return '请先登录'
+            }
+        }
 	},
 }
 
@@ -237,5 +269,7 @@ export default {
     }
     .gray {color: #969ba3;}
     .white{color: #fff;}
-    
+    .module-detail-x-bg{
+        background: rgba(0,0,0,0.3) url('../assets/546e3556cce4ad7673e512cf0b4672c0.jpg') center center no-repeat no-repeat
+    }
 </style>
