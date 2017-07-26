@@ -63,20 +63,20 @@ import Categorys from '../components/category2.vue'
 import Channel from '../components/channel.vue'
 import Hot  from '../components/hot.vue'
 
-import { mapGetters } from 'vuex'
-const imgList = [
-  'http://qidian.qpic.cn/qidian_common/349573/37f39e9a422bdf33676511861a70d947/0',
-  'http://qidian.qpic.cn/qidian_common/349573/069ee39f58d1aa4b214c75f01cc4192d/0',
-  'http://qidian.qpic.cn/qidian_common/349573/78522f7f537312a67e4d79fd4e475a10/0',
-  'http://qidian.qpic.cn/qidian_common/349573/18cf119c9257474ad9f274b5ca984333/0',
-  'http://qidian.qpic.cn/qidian_common/349573/674ec876a92fcdb9c2a03c7f96d53c1f/0'
-]
+// import { mapGetters } from 'vuex'
 export default {
   name:'home',
   components: { Swiper ,SwiperItem,Search,Tab, TabItem, Flexbox, FlexboxItem,
   	Rank,Category,Channel,Hot,Icon,Categorys
   },
   data () {
+		const imgList = [
+			'http://qidian.qpic.cn/qidian_common/349573/37f39e9a422bdf33676511861a70d947/0',
+			'http://qidian.qpic.cn/qidian_common/349573/069ee39f58d1aa4b214c75f01cc4192d/0',
+			'http://qidian.qpic.cn/qidian_common/349573/78522f7f537312a67e4d79fd4e475a10/0',
+			'http://qidian.qpic.cn/qidian_common/349573/18cf119c9257474ad9f274b5ca984333/0',
+			'http://qidian.qpic.cn/qidian_common/349573/674ec876a92fcdb9c2a03c7f96d53c1f/0'
+		]
     return {
     	list: imgList,
     	results: [],
@@ -99,7 +99,7 @@ export default {
    	this.$store.dispatch('FETCH_HOME_LIST')
   },
 	computed:{
-	   ...mapGetters(['DONE_HOME_LIST','DONE_HOME_LOADING','DONE_SEARCH_RESULT'])
+	  //  ...mapGetters([])
 	}
 }
 </script>

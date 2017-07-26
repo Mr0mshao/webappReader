@@ -17,13 +17,13 @@ export default {
   },
   methods: {},
   created (){
-    this.$store.dispatch('FETCH_CATALOGUR',{"id":this.$route.params.id})
+    // this.$store.dispatch('FETCH_CATALOGUR',{"id":this.$route.params.id})
   },
   mounted(){
     
   },
   computed:{
-    ...mapGetters(['DONE_CATALOGUR','FETCH_CATALOGUR'])
+    // ...mapGetters(['DONE_CATALOGUR','FETCH_CATALOGUR'])
   }
 }
 </script>

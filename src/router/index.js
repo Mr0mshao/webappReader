@@ -9,13 +9,7 @@ import Channel  from '@/views/channel'
 import Channel2  from '@/views/channel2'
 import Catalogue  from '@/views/catalogue'
 import Reader  from '@/views/reader'
-import Admin  from '@/admin/admin'
-import Booklist from '@/admin/booklist'
-
-
-
 Vue.use(Router)
-
 export default new Router({
   mode: 'hash',
   base: __dirname,
@@ -60,19 +54,9 @@ export default new Router({
         component: Catalogue
     },
     {
-    	path:'/reader/:bid/:id',
+    	path:'/reader/:bid&:id',
     	name:'reader',
     	component: Reader
-    },
-    {
-        path:'/admin',
-        name:'admin',
-        component:Admin
-    },
-    {
-        path:'/admin/:id',
-        name:'booklist',
-        component:Booklist
     }
   ]
 })

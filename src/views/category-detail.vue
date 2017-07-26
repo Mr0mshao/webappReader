@@ -16,11 +16,11 @@ export default {
   },
   methods: {},
   created (){
-    this.$store.dispatch('FETCH_CATEGORY_DETAIL',{"id":this.$route.params.id})
+    // this.$store.dispatch('FETCH_CATEGORY_DETAIL',{"id":this.$route.params.id})
   },
   mounted(){},
   computed:{
-    ...mapGetters(['DONE_CATEGORY_DETAIL','FETCH_CATEGORY_LIST'])
+    // ...mapGetters(['DONE_CATEGORY_DETAIL','FETCH_CATEGORY_LIST'])
   }
 }
 

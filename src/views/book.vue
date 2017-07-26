@@ -83,10 +83,10 @@ export default {
     window.scrollTo(0, 0)
 	},
 	created: function() {
-		this.$store.dispatch('FETCH_BOOK_DETAIL', {"id":this.$route.params.id})
+		// this.$store.dispatch('FETCH_BOOK_DETAIL', {"id":this.$route.params.id})
 	},
 	computed:{
-		...mapGetters(['DONE_BOOK_DETAIL','DONE_ISLOGIN','DONE_USERINFO']),
+		// ...mapGetters(['DONE_BOOK_DETAIL','DONE_ISLOGIN','DONE_USERINFO']),
         tt:function(){
             if(this.DONE_ISLOGIN){
                 let arr = this.DONE_USERINFO.recently.split('#');

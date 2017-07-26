@@ -1,198 +1,25 @@
-import axios from 'axios'
-import Cookies from 'js-cookie'
-import * as types from '../types.js'
-const state = {
-	loading:false,
-	isShowBack: false,
-	isLogin:false,
-	userInfo: window.localStorage.getItem('user') || {},
-	registerState:false,
-	alertShow:false,
-	pageTitle:'我的书城',
-	alertContent:'',
-	searchResult:[],
-	_data:{},
-}
-const getters = {
-	[types.DONE_LOADING]:state => state.loading,
-	[types.DONE_ISSHOWBACK]:state => state.isShowBack,
-	[types.DONE_ISLOGIN]:state => state.isLogin,
-	[types.DONE_USERINFO]:state => state.userInfo,
-	[types.DONE_REGISTER_STATE]:state => state.registerState,
-	[types.DONE_ALERTSHOW]:state => state.alertShow,
-	[types.DONE_PAGETITLE]:state => state.pageTitle,
-	[types.DONE_ALERT_CONTENT]:state => state.alertContent,
-	[types.DONE_SEARCH_RESULT]:state => state.searchResult,
-}
-
-const actions = {
-	[types.FETCH_LOGIN]({commit}, params){
-		state.loading = true
-		axios({
-		  url: 'http://localhost:80/reader-api/v1/sigin',
-		  method: 'post',
-		  data: params,
-		  transformRequest: [function (data) {
-		    let ret = ''
-		    for (let it in data) {
-		      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-		    }
-		    return ret
-		  }],
-		  headers: {
-		    'Content-Type': 'application/x-www-form-urlencoded'
-		  }
-		}).then((res)=>{
-			if(res.data.msg === 'ok'){
-				console.log(res.data.data)
-				commit(types.TOGGLE_LOGIN, res.data.data);
-				commit(types.TOGGLE_ALERT_CONTENT, '成功')
-				window.localStorage.setItem('user',JSON.stringify(res.data.data)) 
-			}else if(res.data.msg === 'error'){
-				console.log(res.data.data)
-				commit(types.TOGGLE_LOGIN_FAILURE)
-				commit(types.TOGGLE_ALERT_CONTENT, '失败！密码或帐号错误')
-			}
-	    }).catch(function (error) {
-		   console.log(error);
-		});
+import axios from '@/utils/axios_config.js'
+// import Cookies from 'js-cookie'
+const app = {
+	state : {
+		loading: false,
+		logined: false,
+		userInof: {}
 	},
-	[types.FETCH_REGISTER]({commit}, params){
-		state.loading = true
-		console.log('params',JSON.stringify(params))
-		window.localStorage.setItem('user',JSON.stringify(params))
-		axios({
-			method:'post',
-			url: 'http://localhost:80/reader-api/v1/sigup',
-			data:params,
-			transformRequest:[ function (data){
-				let ret = '';
-				for(let it in data){
-					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret;
-			}],
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-		}).then((res)=>{
-			console.log(res.data);
-			if(res.data.status == 'error'){
-				commit(types.TOGGLE_ALERT_CONTENT, res.data.msg)
-				commit(types.TOGGLE_REGISTER_FAILED, res.data.data)
-			}else if(res.data.status == 'ok'){
-				commit(types.TOGGLE_REGISTER)
-				commit(types.TOGGLE_ALERT_CONTENT, '成功')	
-			}
-		}).catch(function (error) {
-		   console.log(error);
-		});
+	getters : {
+		'done_loading_state': state => state.loading
 	},
-	[types.FETCH_SEARCH]({commit}, params){
-		axios({
-			method:'post',
-			url: 'http://localhost:80/reader-api/v1/search',
-			data:params,
-			transformRequest:[ function (data){
-				let ret = '';
-				for(let it in data){
-					ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-				}
-				return ret;
-			}],
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-		}).then((res)=>{
-			if(res.data.msg == 'ok'){
-				commit(types.TOGGLE_SEARCH_RESULT,res.data.data);
-			}
-		}).catch(function (error) {
-		   console.log(error);
-		});
+	actions : {
+		
 	},
-	[types.FETCH_LOGOUT]({commit}, params){
-		commit(types.TOGGLE_LOGOUT)
-		state.alertShow = false
-		window.localStorage.removeItem('user');
-	},
-	[types.FETCH_LOGIN_SESSION]({commit},params){
-		commit(types.TOGGLE_LOGIN_L,params)
-	},
-	[types.FETCH_ALERTSHOW]({commit}){
-		state.alertShow = false
-	},
-	[types.FETCH_ALERT_CONTENT]({commit},str){
-		commit(types.TOGGLE_ALERT_CONTENT,str)
+	mutations : {
+		'toggle_loading_show' (state) {
+			state.loading = true
+		},
+		'toggle_loading_hide' (state) {
+			state.loading = false
+		}
 	}
 }
 
-const mutations = {
-	[types.TOGGLE_LOGIN](state, all){
-		state.userInfo = all
-		state.alertShow = true
-		state.isLogin = true
-		state.loading = false
-	},
-	[types.TOGGLE_LOGIN_L](state, all){
-		state.userInfo = all
-		state.isLogin = true
-		state.loading = false
-	},
-	[types.TOGGLE_LOGIN_FAILURE](state, all){
-		state.userInfo = {}
-		state.alertShow = true
-		state.isLogin = false
-		state.loading = false
-	},
-	[types.TOGGLE_REGISTER](state, all){
-		// state.userInfo = all
-		state.alertShow = true
-		state.isLogin = false
-		state.loading = false
-	},
-	[types.TOGGLE_REGISTER_FAILED](state, all){
-		state.userInfo = {}
-		state.alertShow = true
-		state.isLogin = false
-		state.loading = false
-	},
-	[types.TOGGLE_LOGOUT](state){
-		state.userInfo = {}
-		state.isLogin = false
-	},
-	[types.TOGGLE_START_LOADING](stata){
-		state.loading = true
-	},
-	[types.TOGGLE_FINISH_LOADING](stata){
-		state.loading = false
-	},
-	[types.TOGGLE_ISSHOWBACK_Y](stata){
-		state.isShowBack = true
-	},
-	[types.TOGGLE_ISSHOWBACK_N](stata){
-		state.isShowBack = false
-	},
-	[types.TOGGLE_ALERTSHOW_Y](stata){
-		state.alertShow = true
-	},
-	[types.TOGGLE_PAGETITLE](stata, str){
-		state.alertShow = false
-		state.pageTitle = str
-	},
-	[types.TOGGLE_ALERT_CONTENT](stata, str){
-		state.alertShow = true
-		state.alertContent = str
-	},
-	[types.TOGGLE_SEARCH_RESULT](stata, all){
-		state.searchResult = all
-	},
-	[types.TOGGLE_USERINFO](state,all){
-		state.userInfo.recently = all
-		window.localStorage.setItem('user',JSON.stringify(state.userInfo))
-	}
-
-}
-
-export default {
-    state,
-    getters,
-    mutations,
-    actions
-}
+export default app

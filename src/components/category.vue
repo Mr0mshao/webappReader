@@ -23,7 +23,7 @@
 			</tab>
 			<swiper height="168px" :show-dots="false" v-model="tIndex">
 				<swiper-item v-for="(item, index) in listData" :key="index">
-					<div  v-for="(i, idx) in item" class="cate-box">
+					<div v-for="(i, idx) in item" :key="idx" class="cate-box">
 						<router-link :to="{name:'book',params:{id:i.id}}">
 							<img :src="i.url" style="width: 66px;height88px;">
 			        		<figcaption class="slide-caption" style="text-align: left">{{i.name}}</figcaption>
@@ -34,7 +34,6 @@
 			</swiper>
 		</div>
 	</div>
-
 </div>
 </template>
 
@@ -51,16 +50,7 @@ export default {
     	demo3:'历史军事',
     	tIndex:0,
     }
-  },
-  methods: {
-  },
-  computed:{
-  },
-  mounted(){
-  	// setInterval(()=> {
-  	// 	console.log(this.tIndex)
-  	// },1000)
-  },
+  }
 }
 
 </script>
@@ -82,5 +72,4 @@ export default {
 figcaption.slide-caption{
 	color: #333;
 }
-
 </style>
