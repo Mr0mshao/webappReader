@@ -6,8 +6,6 @@ import router from './router/index.js'
 import App from './App'
 import Home from './views/home'
 import store from './store/index.js'
-import VueResource from 'vue-resource'
-Vue.use(VueResource)
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false
@@ -54,7 +52,6 @@ new Vue({
       if(!window.localStorage.getItem('user')){
       }else{
         this.$store.dispatch('FETCH_LOGIN_SESSION',JSON.parse(window.localStorage.getItem('user')))
-        // console.log('success',JSON.parse(window.localStorage.getItem('user')))
       }
   	}
   }

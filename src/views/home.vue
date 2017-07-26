@@ -15,7 +15,7 @@
 		cancel-text="取消"
 		placeholder="请输入关键词"
 		v-model="keyWords"
-		:results="DONE_SEARCH_RESULT"
+		:results="done_search_list"
 		@on-submit="onSubmit"
 		@on-cancel="sShow = false"
 		@on-result-click="resultClick"
@@ -47,11 +47,11 @@
 			</router-link>
 		</flexbox-item>
 	</flexbox>
-	<Hot :listData="DONE_HOME_LIST.hot"></Hot>
-	<Rank :listData='DONE_HOME_LIST.rank'></Rank>
-	<Category :listData='DONE_HOME_LIST.category'></Category>
-	<Categorys :listData='DONE_HOME_LIST.categorys'></Categorys>
-	<Channel :listData='DONE_HOME_LIST.channel'></Channel>
+	<Hot :listData="done_home_list.hot"></Hot>
+	<Rank :listData='done_home_list.rank'></Rank>
+	<Category :listData='done_home_list.category'></Category>
+	<Categorys :listData='done_home_list.categorys'></Categorys>
+	<Channel :listData='done_home_list.channel'></Channel>
 </div>
 </template>
 
@@ -63,12 +63,10 @@ import Categorys from '../components/category2.vue'
 import Channel from '../components/channel.vue'
 import Hot  from '../components/hot.vue'
 
-// import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name:'home',
-  components: { Swiper ,SwiperItem,Search,Tab, TabItem, Flexbox, FlexboxItem,
-  	Rank,Category,Channel,Hot,Icon,Categorys
-  },
+  components: { Swiper ,SwiperItem, Search, Tab, TabItem, Flexbox, FlexboxItem, Rank, Category, Channel, Hot, Icon, Categorys },
   data () {
 		const imgList = [
 			'http://qidian.qpic.cn/qidian_common/349573/37f39e9a422bdf33676511861a70d947/0',
@@ -95,11 +93,11 @@ export default {
     	this.keyWords = ''	
     },
   },
-  created(){
-   	this.$store.dispatch('FETCH_HOME_LIST')
+  created () {
+   	this.$store.dispatch('fetch_home_list')
   },
-	computed:{
-	  //  ...mapGetters([])
+	computed: {
+	   ...mapGetters(['done_home_list', 'done_search_list'])
 	}
 }
 </script>

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
   	<div style="min-height: calc(100% - 50px)">
-      <layoutHeader :isShowBack='DONE_ISSHOWBACK'></layoutHeader>
+      <layoutHeader :isShowBack='leftOptions'></layoutHeader>
       <router-view></router-view>
-      <loading v-model="DONE_LOADING"></loading>
+      <loading v-model="done_loading_state"></loading>
       <BackToTop v-show="backBtnShow" @click.native='backToTop'></BackToTop> 
       <footer class="footer-copy">
         copyright © 2002-2017 www.mr-mshao.sapce
@@ -40,7 +40,12 @@ export default {
     },500)
   },
   computed:{
-    ...mapGetters(['DONE_LOADING','DONE_ISSHOWBACK'])
+    ...mapGetters(['done_loading_state']),
+    leftOptions () {
+      return {
+        showBack: this.$route.path !== '/'
+      }
+    }
   }
 }
 </script>

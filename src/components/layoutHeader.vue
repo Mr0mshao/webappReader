@@ -6,9 +6,9 @@
         style="background-color:#000;"
       >
         {{DONE_PAGETITLE ? DONE_PAGETITLE : pageTitle}}
-        <a slot="right" v-show="DONE_ISLOGIN ? false : true" @click="showReginster= true">注册</a>
-        <a slot="right" v-show="DONE_ISLOGIN ? false : true" @click="showXdialog = true">登录</a>
-        <span slot="right" v-show="DONE_ISLOGIN ? true : false" style="font-size:12px;">
+        <a slot="right" v-show="done_logined ? false : true" @click="showReginster= true">注册</a>
+        <a slot="right" v-show="done_logined ? false : true" @click="showXdialog = true">登录</a>
+        <span slot="right" v-show="done_logined ? true : false" style="font-size:12px;">
         {{DONE_USERINFO.nickName}} <span style="color: #f60">|</span> <span @click="logout">注销</span>
         </span>
       </x-header>
@@ -100,9 +100,9 @@
           </div>
         </x-dialog>
       </div>
-      <div v-transfer-dom>
+      <!-- <div v-transfer-dom>
         <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-hide="onHide">{{DONE_ALERT_CONTENT}}</alert>
-      </div>
+      </div> -->
 
     </div>
 </template>
@@ -140,12 +140,10 @@ export default {
     }
   },
   computed:{
-    ...mapGetters(['DONE_USERINFO','DONE_ISLOGIN','DONE_ALERTSHOW','DONE_PAGETITLE',
-      'DONE_ALERT_CONTENT'])
+    ...mapGetters(['done_logined'])
   },
   methods:{
     getValue(){
-      console.log(this.loginInfo);
       if( this.loginInfo.username && this.loginInfo.password && this.loginInfo.username.length>5){
         this.alertTitle = '登录'
         this.showXdialog = false;
@@ -158,7 +156,6 @@ export default {
       }
     },
     getRegValue(){
-      console.log(this.registerInfo);
       if(this.registerInfo.username && this.registerInfo.password && this.registerInfo.nickName && this.registerInfo.confirPassword && this.registerInfo.email ){
         this.alertTitle = '注册'
         this.register(this.registerInfo)

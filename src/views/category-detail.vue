@@ -7,10 +7,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import layoutList from '../components/list.vue'
-import {Group, Cell } from 'vux'
 export default {
   name:'category',
-  components: { layoutList,Group, Cell },
+  components: { layoutList },
   data () {
     return {}
   },
