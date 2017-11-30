@@ -5,14 +5,12 @@
         :right-options="{showMore:false}"
         style="background-color:#000;"
       >
-        {{DONE_PAGETITLE ? DONE_PAGETITLE : pageTitle}}
-        <a slot="right" v-show="done_logined ? false : true" @click="showReginster= true">注册</a>
-        <a slot="right" v-show="done_logined ? false : true" @click="showXdialog = true">登录</a>
-        <span slot="right" v-show="done_logined ? true : false" style="font-size:12px;">
-        {{DONE_USERINFO.nickName}} <span style="color: #f60">|</span> <span @click="logout">注销</span>
+        我的书城
+        <router-link to="/register" slot="right">注册</router-link>
+        <router-link to="/login" slot="right">登录</router-link>
         </span>
       </x-header>
-      <div v-transfer-dom>
+      <!-- <div v-transfer-dom>
         <x-dialog v-model="showXdialog" :hideOnBlur="true">
           <p class="dialog-title">登录</p>
           <div class="dialog-content">
@@ -51,7 +49,7 @@
                 v-model="registerInfo.username"
                 :required="true"
               >
-<img slot="label" style="padding-right:10px;display:block;" src="../assets/user.png" width="24" height="24">
+<img slot="label" class="input-icon" src="../assets/user.png" >
               </x-input>
               <x-input 
                 title="邮 箱：" 
@@ -61,7 +59,7 @@
                 v-model="registerInfo.email"
                 :required="true"
               >
-<img slot="label" style="padding-right:10px;display:block;" src="../assets/email.png" width="24" height="24">
+<img slot="label" class="input-icon" src="../assets/email.png" >
               </x-input>
               <x-input 
                 title="昵 称：" 
@@ -71,7 +69,7 @@
                 v-model="registerInfo.nickName"
                 :required="true"
               >
-<img slot="label" style="padding-right:10px;display:block;" src="../assets/nicheng2.png" width="24" height="24">
+<img slot="label" class="input-icon" src="../assets/nicheng2.png" >
               </x-input>
               <x-input 
                 title="密 码：" 
@@ -80,7 +78,7 @@
                 v-model="registerInfo.password"
                 :required="true"
               >
-<img slot="label" style="padding-right:10px;display:block;" src="../assets/pwd.png" width="24" height="24">
+<img slot="label" class="input-icon" src="../assets/pwd.png" >
               </x-input>
               <x-input 
                 title="确认密码："
@@ -90,7 +88,7 @@
                 v-model="registerInfo.confirPassword"
                 :equal-with="registerInfo.password"
               >
-<img slot="label" style="padding-right:10px;display:block;" src="../assets/confirpwd.png" width="24" height="24">
+<img slot="label" class="input-icon" src="../assets/confirpwd.png" >
               </x-input>
             </group>
           </div>
@@ -99,7 +97,7 @@
             <button class="dialog-btn dialog-close" @click="showReginster = false">取消</button>
           </div>
         </x-dialog>
-      </div>
+      </div> -->
       <!-- <div v-transfer-dom>
         <alert v-model="DONE_ALERTSHOW" :title='alertTitle' @on-hide="onHide">{{DONE_ALERT_CONTENT}}</alert>
       </div> -->
@@ -116,60 +114,57 @@ export default {
   props:['isShowBack'],
   data () {
     return {
-      loginInfo:{
-        username:'',
-        password:''
-      },
-      registerInfo:{
-        username:'',
-        email:'',
-        nickName:'',
-        password:'',
-        confirPassword:'',
-      },
-      showReginster:false,
-      showXdialog:false,
+      // loginInfo:{
+      //   username:'',
+      //   password:''
+      // },
+      // registerInfo:{
+      //   username:'',
+      //   email:'',
+      //   nickName:'',
+      //   password:'',
+      //   confirPassword:'',
+      // },
+      // showReginster:false,
+      // showXdialog:false,
       pageTitle: '我的书城',
-      alertTitle:'',
-      validElement: function(value){
-        return {
-          vaild : value==='2333',
-          msg: 'Must be 2333'
-        }
-      },
+      // alertTitle:'',
+      // validElement: function(value){
+      //   return {
+      //     vaild : value==='2333',
+      //     msg: 'Must be 2333'
+      //   }
+      // },
     }
   },
-  computed:{
-    ...mapGetters(['done_logined'])
-  },
   methods:{
-    getValue(){
-      if( this.loginInfo.username && this.loginInfo.password && this.loginInfo.username.length>5){
-        this.alertTitle = '登录'
-        this.showXdialog = false;
-        this.login(this.loginInfo)
-      }else{
-        this.showXdialog = false;
-        // alert('请输入合法的帐号或密码')
-        this.$store.dispatch('FETCH_ALERT_CONTENT','请输入合法的帐号或密码')
-        return false
-      }
-    },
-    getRegValue(){
-      if(this.registerInfo.username && this.registerInfo.password && this.registerInfo.nickName && this.registerInfo.confirPassword && this.registerInfo.email ){
-        this.alertTitle = '注册'
-        this.register(this.registerInfo)
-        this.showReginster = false;
-      }else{
-        this.showReginster = false;
-        this.$store.dispatch('FETCH_ALERT_CONTENT','请输入合法的字段')
-        return false
-      }
+    // getValue(){
+    //   if( this.loginInfo.username && this.loginInfo.password && this.loginInfo.username.length>5){
+    //     this.alertTitle = '登录'
+    //     this.showXdialog = false;
+    //     this.login(this.loginInfo)
+    //   }else{
+    //     this.showXdialog = false;
+    //     // alert('请输入合法的帐号或密码')
+    //     this.$store.dispatch('FETCH_ALERT_CONTENT','请输入合法的帐号或密码')
+    //     return false
+    //   }
+    // },
+    // getRegValue(){
+    //   if(this.registerInfo.username && this.registerInfo.password && this.registerInfo.nickName && this.registerInfo.confirPassword && this.registerInfo.email ){
+    //     this.alertTitle = '注册'
+    //     this.register(this.registerInfo)
+    //     this.showReginster = false;
+    //   }else{
+    //     this.showReginster = false;
+    //     this.$store.dispatch('FETCH_ALERT_CONTENT','请输入合法的字段')
+    //     return false
+    //   }
 
       
-    },
+    // },
     login(params){
-      this.$store.dispatch('FETCH_LOGIN',params)
+      
     },
     register(params){
       this.$store.dispatch('FETCH_REGISTER',params)
@@ -182,10 +177,10 @@ export default {
       console.log('on hide')
       this.$store.dispatch('FETCH_ALERTSHOW')
     },
-  },
+  }
 }
 </script>
-<style>
+<style scoped>
 .weui-dialog{
   border-radius: 8px;
 }
@@ -228,6 +223,12 @@ export default {
 }
 .btn{
   border-top: 1px solid #ddd
+}
+.input-icon {
+  display:block;
+  width: 24px;
+  height: 24px;
+  padding-right:10px;
 }
 </style>
 

@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-  	<div style="min-height: calc(100% - 50px)">
       <layoutHeader :isShowBack='leftOptions'></layoutHeader>
-      <router-view></router-view>
-      <loading v-model="done_loading_state"></loading>
-      <BackToTop v-show="backBtnShow" @click.native='backToTop'></BackToTop> 
-      <footer class="footer-copy">
-        copyright © 2002-2017 www.mr-mshao.sapce
-      </footer>
-    </div>
-    
+      <transition :name="transitionName">
+        <router-view></router-view>
+      </transition>
+      <loading v-model="showLoading" />
+      <BackToTop v-show="backBtnShow" @click.native='backToTop' />
+      <footer class="footer-copy">copyright © 2002-2017 www.mr-mshao.sapce</footer>
   </div>
 </template>
 
@@ -20,17 +17,21 @@ import { Loading } from 'vux'
 import { mapGetters } from 'vuex'
 export default {
   name: 'app',
-  components:{ layoutHeader,Loading,BackToTop},
+  components: { layoutHeader, Loading, BackToTop },
   data () {
-  	return {backBtnShow : false}
+  	return {
+      backBtnShow: false,
+      showLoading: false,
+      transitionName: 'slide-left'
+    }
   },
   methods: {
-    backToTop() {
+    backToTop () {
       window.scrollTo(0,0)
       this.backBtnShow = false
     }
   },
-  mounted(){
+  mounted () {
     setInterval(()=>{
       if(window.scrollY > 650){
           this.backBtnShow = true
@@ -39,12 +40,18 @@ export default {
         }
     },500)
   },
-  computed:{
-    ...mapGetters(['done_loading_state']),
+  computed: {
     leftOptions () {
       return {
         showBack: this.$route.path !== '/'
       }
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
     }
   }
 }
@@ -56,4 +63,20 @@ export default {
 body {
   background-color: #fbf9fe;
 }
+.slide-left-enter-active,.slide-left-leave-active {
+    transition: all 0.4s ease-in-out;
+}
+.slide-left-enter,.slide-left-leave-active {
+   opacity: 0;
+   transform:translateX(-300px);
+}
+
+.slide-right-enter-active,.slide-right-leave-active {
+    transition: all 0.4s ease-out;
+}
+.slide-right-enter,.slide-right-leave-active {
+   opacity: 0;
+   transform:translateX(300px);
+}
+
 </style>

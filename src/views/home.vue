@@ -14,11 +14,6 @@
 		position="absolute"
 		cancel-text="取消"
 		placeholder="请输入关键词"
-		v-model="keyWords"
-		:results="done_search_list"
-		@on-submit="onSubmit"
-		@on-cancel="sShow = false"
-		@on-result-click="resultClick"
 	></search>
 	<flexbox class='home_nav'>
 		<flexbox-item>
@@ -47,16 +42,15 @@
 			</router-link>
 		</flexbox-item>
 	</flexbox>
-	<Hot :listData="done_home_list.hot"></Hot>
-	<Rank :listData='done_home_list.rank'></Rank>
-	<Category :listData='done_home_list.category'></Category>
-	<Categorys :listData='done_home_list.categorys'></Categorys>
-	<Channel :listData='done_home_list.channel'></Channel>
+	<Hot :listData="[]"></Hot>
+	<Rank :listData='[]'></Rank>
+	<Category :listData='[]'></Category>
+	<Categorys :listData='[]'></Categorys>
+	<Channel :listData='[]'></Channel>
 </div>
 </template>
-
 <script>
-import {Swiper,SwiperItem,Search,Tab,TabItem,Flexbox, FlexboxItem,Icon} from 'vux'
+import {Swiper, SwiperItem, Search, Tab, TabItem, Flexbox, FlexboxItem, Icon} from 'vux'
 import Rank from '../components/rank.vue'
 import Category from '../components/category.vue'
 import Categorys from '../components/category2.vue'
@@ -92,13 +86,7 @@ export default {
     	this.$store.dispatch('FETCH_SEARCH',{'key':this.keyWords})
     	this.keyWords = ''	
     },
-  },
-  created () {
-   	this.$store.dispatch('fetch_home_list')
-  },
-	computed: {
-	   ...mapGetters(['done_home_list', 'done_search_list'])
-	}
+  }
 }
 </script>
 

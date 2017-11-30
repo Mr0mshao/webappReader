@@ -39,21 +39,5 @@ Vue.filter("formatType", function (value) {
 new Vue({
   router,
   store,
-  render: h => h(App),
-  watch:{
-  	'$route':'checkLogin'
-  },
-  created(){
-  	this.checkLogin()
-  },
-  methods:{
-  	checkLogin(){
-  	  //检查是否存在localStorage
-      if(!window.localStorage.getItem('user')){
-      }else{
-        this.$store.dispatch('FETCH_LOGIN_SESSION',JSON.parse(window.localStorage.getItem('user')))
-      }
-  	}
-  }
-
+  render: h => h(App)
 }).$mount('#app-box')

@@ -7,13 +7,13 @@ axios.defaults.transformRequest = [function (data) {
   return Qs.stringify(data)
 }]
 
-axios.interceptors.request.use( (config)=>{
+axios.interceptors.request.use((config)=>{
   return config
 }, (err)=>{
   return new Promise.reject(err)
 })
 
-axios.interceptors.response.use( (response)=>{
+axios.interceptors.response.use((response)=>{
   return response.data
 }, (err)=>{
   console.log(err)
