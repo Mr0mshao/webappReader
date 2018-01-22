@@ -12,32 +12,31 @@
 		</div>
 	</div>
 	<swiper v-model='index' :show-dots="false" height="456px">
-		<swiper-item :key='index' v-for="item in listData">
+		<swiper-item  v-for="(item, index) in listData" :key="index">
 			<div class="book-ol book-ol-normal">
-				<div class="book-li" v-for="i in item">
+				<div class="book-li" v-for="(i, idx) in item" :key="idx">
 					<router-link :to="{name:'book',params:{id:i.id}}" class="book-layout">
-						<img :src="i.url" class="book-cover">
+						<img :src="i.bid | myImage" class="book-cover">
 						<div class="book-cell">
-							<h4 class="book-title">{{i.name}}</h4>
+							<h4 class="book-title">{{i.bName}}</h4>
 							<p class="book-desc">
-								{{i.description}}
+								{{i.desc}}
 							</p>
 							<div class="book-meta">
 								<div class="book-meta-l">
-									作者：<span>{{i.author}}</span>
+									作者：<span>{{i.bAuth}}</span>
 								</div>
 								<div class="book-meta-r">
 									<span>
-										<em class="book-meta-icon">{{i.type | formatType}}</em>
-										<em class="book-meta-icon red">{{i.status === '1' ? '完本' : '连载' }}</em>
-										<!-- <em class="book-meta-icon info">{{i.wordcount}}万字</em> -->
+										<em class="book-meta-icon">{{i.cat}}</em>
+										<em class="book-meta-icon red">{{i.state}}</em>
+										<em class="book-meta-icon info">{{i.cnt}}</em>
 									</span>
 								</div>
 							</div>
 						</div>
 					</router-link>				
 				</div>
-
 			</div>		
 		</swiper-item>
 	</swiper>

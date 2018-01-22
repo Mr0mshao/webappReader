@@ -1,3 +1,11 @@
+/*
+ * @Author: mr.mshao 
+ * @Date: 2018-01-22 16:24:25 
+ * @Last Modified by: mr.mshao
+ * @Last Modified time: 2018-01-22 17:02:09
+ * 排行榜
+ */
+
 <template>    
 	<div style="font-size:16px;min-height: 199px;">
 		<div class="home_title">
@@ -8,13 +16,14 @@
 				</router-link>
 			</span>
 		</div>
-		<scroller lock-y :scrollbar-x=false>
+		<scroller lock-y :scrollbar-x='false' >
 			<div class="box1">
-		        <div class="box1-item" v-for="item in listData">
-		        	<router-link :to="{name:'book',params:{id:item.id}}" class="routerlink">
-		        		<img :src="item.url" class="slide-img">
-		        		<figcaption class="slide-caption">{{item.name}}</figcaption>
-		        		<p class="slide-author">{{item.author}}</p>
+		        <div class="box1-item" v-for="(item, index) in listData" :key="index">
+							<!-- 路由写死 -->
+		        	<router-link :to="{name:'book',params:{id:item.cid}}" class="routerlink">
+		        		<img :src="item.bid | myImage" class="slide-img">
+		        		<figcaption class="slide-caption">{{item.bName}}</figcaption>
+		        		<p class="slide-author">{{item.bAuth}}</p>
 		        	</router-link>
 		        </div>
 	      	</div>
@@ -23,27 +32,16 @@
 </template>
 
 <script>
-import {Scroller,Flexbox, FlexboxItem} from 'vux'
+import { Scroller,Flexbox, FlexboxItem } from 'vux'
 export default {
   name:'rank',
-  components: {Scroller,Flexbox, FlexboxItem},
-  props:['listData'],
-  data () {
-    return {
-    }
-  },
-  methods: {
-  	
-  },
-  computed:{},
-  mounted(){
-  	
-  },
+  components: { Scroller,Flexbox, FlexboxItem },
+  props:['listData']
 }
 
 </script>
 
-<style scope>
+<style>
 	.routerlink{
 		color:#333;
 		display: block;

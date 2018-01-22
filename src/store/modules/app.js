@@ -1,10 +1,16 @@
-import axios from '@/utils/axios_config.js'
-// import Cookies from 'js-cookie'
 const app = {
-	state : {},
-	getters : {},
-	actions : {},
-	mutations : {}
+	state: {
+		isLoading: false
+	},
+	getters: {
+		'DONE_ISLOADING': state => state.isLoading
+	},
+	// actions : {},
+	mutations: {
+		'TOGGLE_ISLOADING' (state, payload) {
+			state.isLoading = payload
+		}
+	}
 }
 
 export default app

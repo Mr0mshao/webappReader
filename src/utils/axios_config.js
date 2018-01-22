@@ -8,12 +8,16 @@ axios.defaults.transformRequest = [function (data) {
 }]
 
 axios.interceptors.request.use((config)=>{
+  store.commit('TOGGLE_ISLOADING', true)
   return config
 }, (err)=>{
   return new Promise.reject(err)
 })
 
 axios.interceptors.response.use((response)=>{
+  setTimeout(() => {
+    store.commit('TOGGLE_ISLOADING', false)
+  }, 700)
   return response.data
 }, (err)=>{
   console.log(err)

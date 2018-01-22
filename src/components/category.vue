@@ -11,7 +11,7 @@
 
 	<div>
 		<div>
-			<tab :line-width=1 active-color='#f60' v-model="tIndex">
+			<tab :line-width='1' active-color='#f60' v-model="tIndex">
 				<tab-item class="vux-center" 
 					v-for="(item,index) in data1" 
 					:selected="demo == item" 
@@ -21,13 +21,13 @@
 				{{item}}
 				</tab-item>
 			</tab>
-			<swiper height="168px" :show-dots="false" v-model="tIndex">
+			<swiper height="145px" :show-dots="false" v-model="tIndex">
 				<swiper-item v-for="(item, index) in listData" :key="index">
 					<div v-for="(i, idx) in item" :key="idx" class="cate-box">
-						<router-link :to="{name:'book',params:{id:i.id}}">
-							<img :src="i.url" style="width: 66px;height88px;">
-			        		<figcaption class="slide-caption" style="text-align: left">{{i.name}}</figcaption>
-			        		<p class="slide-author">{{i.author}}</p>
+						<router-link :to="{name:'book',params:{id:i.cid}}" class="my-link">
+							<img :src="i.bid | myImage" class="b-img"/>
+							<figcaption class="slide-caption">{{i.bName}}</figcaption>
+							<p class="slide-author">{{i.bAuth}}</p>
 						</router-link>
 					</div>
 				</swiper-item>
@@ -69,7 +69,21 @@ export default {
 	text-align: right;
 	overflow: hidden;
 }
-figcaption.slide-caption{
+.my-link .slide-caption{
 	color: #333;
+}
+.my-link {
+	display: block;
+	overflow: hidden;
+	text-align: center;
+}
+.my-link .b-img {
+	display: block;
+	margin: 0 auto;
+	width: 66px;
+	height:88px;
+}
+.my-link .slide-author {
+	text-align: center;
 }
 </style>

@@ -11,13 +11,13 @@
 			{{item}}
 			</tab-item>
 		</tab>
-		<swiper height="168px" :show-dots="false" v-model="tIndex">
+		<swiper height="145px" :show-dots="false" v-model="tIndex">
 			<swiper-item v-for="(item, index) in listData" :key="index">
-				<div  v-for="(i, idx) in item" class="cate-box">
-					<router-link :to="{name:'book',params:{id:i.id}}">
-						<img :src="i.url" style="width: 66px;height88px;">
-		        		<figcaption class="slide-caption" style="text-align: left">{{i.name}}</figcaption>
-		        		<p class="slide-author">{{i.author}}</p>
+				<div  v-for="(i, idx) in item" class="cate-box" :key="idx">
+					<router-link :to="{name:'book',params:{id:i.cid}}" class="my-link">
+						<img :src="i.bid | myImage" style="width: 66px;height88px;">
+		        		<figcaption class="slide-caption">{{i.bName}}</figcaption>
+		        		<p class="slide-author">{{i.bAuth}}</p>
 					</router-link>
 				</div>
 			</swiper-item>
@@ -39,5 +39,36 @@ export default {
     }
   },
 }
-
 </script>
+<style>
+.tab-swiper {
+  background-color: #fff;
+  height: 199px;
+}	
+.cate-box{
+	margin: 5px 5px;
+	height: 155px;
+	width: 82px;
+	display:inline-block;
+	float: left;
+	text-align: right;
+	overflow: hidden;
+}
+.my-link .slide-caption{
+	color: #333;
+}
+.my-link {
+	display: block;
+	overflow: hidden;
+	text-align: center;
+}
+.my-link .b-img {
+	display: block;
+	margin: 0 auto;
+	width: 66px;
+	height:88px;
+}
+.my-link .slide-author {
+	text-align: center;
+}
+</style>

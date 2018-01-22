@@ -1,7 +1,7 @@
 <template>    
 	<div>
 		<ol class="book-ol book-ol-normal">
-			<li class="book-li" v-for="item in datalist">
+			<li class="book-li" v-for="(item, i) in datalist" :key="i">
 				<router-link :to="{name:'book',params:{id:item.id}}" class="book-layout">
 					<img :src="item.url" class="book-cover">
 						<div class="book-cell">

@@ -5,11 +5,12 @@
 		</div>
 		<scroller lock-y :scrollbar-x=false ref="scroller">
 	      <div class="box1">
-	        <div class="box1-item" v-for="item in listData">
-	        	<router-link :to="{name:'book',params:{id:item.id}}" class="routerlink">
-	        		<img :src="item.url" class="slide-img">
-	        		<figcaption class="slide-caption">{{item.name}}</figcaption>
-	        		<p class="slide-author"> {{item.author}} </p>
+	        <div class="box1-item" v-for="(item, index) in listData" :key="index">
+						<!-- 这里写死路由跳转 -->
+	        	<router-link :to="{name:'book',params:{id:item.cid}}" class="routerlink">
+	        		<img :src="item.bid | myImage" class="slide-img">
+	        		<figcaption class="slide-caption">{{item.bName}}</figcaption>
+	        		<p class="slide-author"> {{item.bAuth}} </p>
 	        	</router-link>
 	        </div>
 	      </div>
@@ -19,20 +20,15 @@
 </template>
 
 <script>
-	import {Scroller} from 'vux'
+	import { Scroller } from 'vux'
 	export default {
 	  name:'hot',
-	  components: {Scroller},
-	  props:['listData'],
-	  data () {
-	    return {}
-	  },
-	  methods: {},
-	  mounted(){},
+	  components: { Scroller },
+	  props:['listData']
 	}
 </script>
 
-<style scope>
+<style>
 	.routerlink{
 	    display: block;
 	    width: 4.125rem;

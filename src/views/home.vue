@@ -42,11 +42,11 @@
 			</router-link>
 		</flexbox-item>
 	</flexbox>
-	<Hot :listData="[]"></Hot>
-	<Rank :listData='[]'></Rank>
-	<Category :listData='[]'></Category>
-	<Categorys :listData='[]'></Categorys>
-	<Channel :listData='[]'></Channel>
+	<Hot :listData="DONE_PAGEDATA && DONE_PAGEDATA.hot"></Hot>
+	<Rank :listData='DONE_PAGEDATA && DONE_PAGEDATA.rank'></Rank>
+	<Category :listData='DONE_PAGEDATA && DONE_PAGEDATA.categoryUpper'></Category>
+	<Categorys :listData='DONE_PAGEDATA && DONE_PAGEDATA.categoryBottom'></Categorys>
+	<Channel :listData='DONE_PAGEDATA && DONE_PAGEDATA.channel'></Channel>
 </div>
 </template>
 <script>
@@ -85,8 +85,17 @@ export default {
     onSubmit () {
     	this.$store.dispatch('FETCH_SEARCH',{'key':this.keyWords})
     	this.keyWords = ''	
-    },
-  }
+		},
+		fetchHomeData () {
+			this.$store.dispatch('FETCH_PAGEDATA')
+		}
+	},
+	computed: {
+		...mapGetters(['DONE_PAGEDATA'])
+	},
+	mounted () {
+		this.fetchHomeData()
+	}
 }
 </script>
 
