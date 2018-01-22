@@ -36,6 +36,9 @@ Vue.filter("formatType", function (value) {
   }
   return str;
 })
+Vue.filter("myImage", function (bid) {
+  return `https://qidian.qpic.cn/qdbimg/349573/${bid}/150`
+})
 new Vue({
   router,
   store,

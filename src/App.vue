@@ -1,27 +1,32 @@
 <template>
   <div id="app">
-      <layoutHeader :isShowBack='leftOptions'></layoutHeader>
+      <x-header 
+        :left-options="{backText: '', showBack: $route.path !== '/'}"
+        style="background-color:#333;"
+      >
+        <span>我的书城</span>
+        <router-link to="/register" slot="right">注册</router-link>
+        <router-link to="/login" slot="right">登录</router-link>
+      </x-header>
       <transition :name="transitionName">
-        <router-view></router-view>
+        <router-view />
       </transition>
-      <loading v-model="showLoading" />
+      <loading v-model="DONE_ISLOADING" />
       <BackToTop v-show="backBtnShow" @click.native='backToTop' />
-      <footer class="footer-copy">copyright © 2002-2017 www.mr-mshao.sapce</footer>
   </div>
 </template>
 
 <script>
-import layoutHeader from './components/layoutHeader'
 import BackToTop from './components/backToTop.vue'
-import { Loading } from 'vux'
+import { Loading, XHeader } from 'vux'
 import { mapGetters } from 'vuex'
 export default {
   name: 'app',
-  components: { layoutHeader, Loading, BackToTop },
+  components: { XHeader, Loading, BackToTop },
+  computed: { ...mapGetters(['DONE_ISLOADING']) },
   data () {
   	return {
       backBtnShow: false,
-      showLoading: false,
       transitionName: 'slide-left'
     }
   },
@@ -38,14 +43,7 @@ export default {
         }else{
           this.backBtnShow = false
         }
-    },500)
-  },
-  computed: {
-    leftOptions () {
-      return {
-        showBack: this.$route.path !== '/'
-      }
-    }
+    }, 500)
   },
   watch: {
     '$route' (to, from) {
@@ -59,7 +57,6 @@ export default {
 
 <style lang="less">
 @import '~vux/src/styles/reset.less';
-
 body {
   background-color: #fbf9fe;
 }
@@ -78,5 +75,9 @@ body {
    opacity: 0;
    transform:translateX(300px);
 }
-
+.slide-caption {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
 </style>
