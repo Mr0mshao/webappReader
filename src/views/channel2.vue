@@ -1,6 +1,6 @@
 <template>    
 <div>
-  <layout-list :datalist="DONE_CHANNEL_LIST_FAMALE"></layout-list>
+  <List :data-list="DONE_MALE" />
   <x-button type="default" @click.native="loadMore_famale">加载更多...</x-button>
 </div>
 </template>
@@ -8,27 +8,25 @@
 <script>
 import { mapGetters } from 'vuex'
 import { XButton} from 'vux'
-import layoutList from '../components/list.vue'
+import List from '../components/list.vue'
 export default {
   name:'channel',
-  components: {layoutList,XButton},
+  components: { List, XButton },
   data(){
     return {
       currPage:1
     }
   },
- 	methods: {
-    loadMore_famale(){
-      this.$store.dispatch('FETCH_CHANNEL_LIST',{"type":this.$route.params.type,"page":this.currPage++})
-    }
-  },
+ 	// methods: {
+  //   loadMore_famale(){
+  //     this.$store.dispatch('FETCH_CHANNEL_LIST',{"type":this.$route.params.type,"page":this.currPage++})
+  //   }
+  // },
   created (){
-    this.$store.dispatch('FETCH_CHANNEL_CLEARN_FAMALE')
-    this.$store.dispatch('FETCH_CHANNEL_LIST',{"type":this.$route.params.type,"page":this.currPage++})
+    this.$store.dispatch('FETCH_MALE')
   },
-  mounted(){},
   computed:{
-    ...mapGetters(['DONE_CHANNEL_LIST_FAMALE'])
+    ...mapGetters(['DONE_MALE'])
   }
 }
 

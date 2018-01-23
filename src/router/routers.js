@@ -10,12 +10,12 @@ export const commonRoute = [
     component: resolve => {require(['@/views/rank'], resolve)}
   },
   {
-    path:'/channel/:type',
-    name:'channel',
+    path:'/female',
+    name:'female',
     component: resolve => {require(['@/views/channel'], resolve)}
   },{
-    path:'/channel2/:type',
-    name:'channel2',
+    path:'/male',
+    name:'male',
     component: resolve => {require(['@/views/channel2'], resolve)}
   },
   {

@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import app from './modules/app.js'
 import home from './modules/home.js'
 import rank from './modules/rank'
+import channel from './modules/channel'
+import book from './modules/book'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -10,6 +12,8 @@ export default new Vuex.Store({
 	modules:{
 		app,
 		home,
-		rank
+		rank,
+		channel,
+		book
 	},
 })

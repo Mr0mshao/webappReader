@@ -11,7 +11,7 @@
       <transition :name="transitionName">
         <router-view />
       </transition>
-      <loading v-model="DONE_ISLOADING" />
+      <Loading v-show="DONE_ISLOADING" />
       <BackToTop v-show="backBtnShow" @click.native='backToTop' />
   </div>
 </template>
@@ -23,7 +23,6 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'app',
   components: { XHeader, Loading, BackToTop },
-  computed: { ...mapGetters(['DONE_ISLOADING']) },
   data () {
   	return {
       backBtnShow: false,
@@ -44,6 +43,9 @@ export default {
           this.backBtnShow = false
         }
     }, 500)
+  },
+  computed: {
+    ...mapGetters(['DONE_ISLOADING'])
   },
   watch: {
     '$route' (to, from) {

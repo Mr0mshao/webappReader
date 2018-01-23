@@ -1,30 +1,20 @@
 <template>    
 <div>
-  <layout-list :datalist="DONE_CATEGORY_DETAIL"></layout-list>
+  <List :datalist="DONE_CATEGORY_DETAIL" />
 </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import layoutList from '../components/list.vue'
+import List from '../components/list.vue'
 export default {
   name:'category',
-  components: { layoutList },
-  data () {
-    return {}
-  },
-  methods: {},
+  components: { List },
   created (){
     // this.$store.dispatch('FETCH_CATEGORY_DETAIL',{"id":this.$route.params.id})
   },
-  mounted(){},
   computed:{
-    // ...mapGetters(['DONE_CATEGORY_DETAIL','FETCH_CATEGORY_LIST'])
+    // ...mapGetters(['DONE_CATEGORY_DETAIL'])
   }
 }
-
 </script>
-
-<style>
-	
-</style>

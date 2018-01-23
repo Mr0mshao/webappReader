@@ -15,7 +15,8 @@
 		<swiper-item  v-for="(item, index) in listData" :key="index">
 			<div class="book-ol book-ol-normal">
 				<div class="book-li" v-for="(i, idx) in item" :key="idx">
-					<router-link :to="{name:'book',params:{id:i.id}}" class="book-layout">
+					<!-- 写死路由 -->
+					<router-link :to="{name:'book',params:{id:i.cid}}" class="book-layout">
 						<img :src="i.bid | myImage" class="book-cover">
 						<div class="book-cell">
 							<h4 class="book-title">{{i.bName}}</h4>

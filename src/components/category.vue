@@ -24,6 +24,7 @@
 			<swiper height="145px" :show-dots="false" v-model="tIndex">
 				<swiper-item v-for="(item, index) in listData" :key="index">
 					<div v-for="(i, idx) in item" :key="idx" class="cate-box">
+						<!-- 写死路由 -->
 						<router-link :to="{name:'book',params:{id:i.cid}}" class="my-link">
 							<img :src="i.bid | myImage" class="b-img"/>
 							<figcaption class="slide-caption">{{i.bName}}</figcaption>

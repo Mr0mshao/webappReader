@@ -7,7 +7,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('1')
+  // console.log('1')
+  // 可以在这里做路由拦截
   next()
 })
 

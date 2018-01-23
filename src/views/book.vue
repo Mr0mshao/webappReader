@@ -1,53 +1,57 @@
 <template> 
-    <div style="font-size: 16px;">
-    	<div class="module-merge module-detail-x module-detail-x-bg">
-    		<div class="book-detail-info">
-    			<div class="book-layout">
-    				<img class="book-cover" :src="DONE_BOOK_DETAIL.url"></img>
-    				<div class="book-cell">
-    					<h2 class="book-title">{{DONE_BOOK_DETAIL.name}}</h2>
-    					<div class="book-rand-a">作者：{{DONE_BOOK_DETAIL.author}}</div>
-    					<div class="book-score">类型：{{DONE_BOOK_DETAIL.type | formatType}}</div>
-    					<p class="book-meta">关键字：{{DONE_BOOK_DETAIL.keywords}}</p>
-    					<p class="book-meta">
-    						状态：{{DONE_BOOK_DETAIL.wordcount}}千字
-    						<span class="char-pipe">|</span>
-    						<span class="red">{{DONE_BOOK_DETAIL.status == 0 ? '连载' : '完本'}}</span>
-    					</p>
-                        <p class="book-meta">上架时间：{{DONE_BOOK_DETAIL.createtime | formatDate}}</p>
-    				</div>
-    			</div>
-    			<div class="book-detail-btn">
-    				<ul class="btn-group">
-    					<li class="btn-group-cell">
-                            <router-link class="btn-normal white" :to="{name:'reader',params:{bid:DONE_BOOK_DETAIL.id,id:1}}">开始阅读</router-link>
-                        </li>
-                        <li class="btn-group-cell">
-    						<router-link :to="record" class="btn-normal red"  style="background-color:#fff">{{tt}}</router-link>
-    					</li>
-    				</ul>
-    			</div>
-    		</div>
-    	</div>
-    		
-    	<div class="module module-merge">
-    		<section class="book-summary" v-on:click="console" :style="{maxHeight:maxHeight+'rem'}">
-    			<div>
-    				{{DONE_BOOK_DETAIL.description}}
-    			</div>
-    		</section>
-    		<router-link :to="{name:'catalogue',params:{id:DONE_BOOK_DETAIL.id}}" class="book-meta book-status">
-    			<div class="option">
-    				<div class="book-meta-l">
-    					<strong class="book-spt">目录</strong>
-    				</div>
-    				<div class="book-meta-r">
-    					<p class="gray ell"></p>
-    				</div>
-    			</div>
-    		</router-link>
-    	</div>
-    </div>   
+<div style="font-size: 16px;">
+  <div class="module-merge module-detail-x module-detail-x-bg">
+    <div class="book-detail-info">
+      <div class="book-layout">
+        <img class="book-cover" :src="DONE_BOOKINFO.cover" />
+        <div class="book-cell">
+          <h2 class="book-title">{{DONE_BOOKINFO.name}}</h2>
+          <div class="book-rand-a">作者：{{DONE_BOOKINFO.author}}</div>
+          <div class="book-score">类型：{{DONE_BOOKINFO.type}}</div>
+          <p class="book-meta">关键字：{{DONE_BOOKINFO.keywords}}</p>
+          <p class="book-meta">
+              <span>状态：<span class="red">{{DONE_BOOKINFO.status}}</span></span>
+              <span class="char-pipe">|</span>
+              <span class="red">{{DONE_BOOKINFO.wordcount}}</span>
+          </p>
+          <p class="book-meta">上架时间：{{DONE_BOOKINFO.createtime}}</p>
+        </div>
+      </div>
+      <div class="book-detail-btn">
+        <ul class="btn-group">
+          <li class="btn-group-cell">
+            <router-link
+              class="btn-normal white"
+              :to="{name: 'reader', params: {bid: DONE_BOOKINFO.id, id: 1}}"
+            >开始阅读</router-link>
+          </li>
+          <li class="btn-group-cell">
+            <router-link
+              :to="record"
+              class="btn-normal red" 
+              style="background-color:#fff"
+            >{{tt}}</router-link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div> 
+  <div class="module module-merge">
+    <section class="book-summary" v-on:click="console" :style="{maxHeight:maxHeight+'rem'}">
+      <div v-html="DONE_BOOKINFO.description"></div>
+    </section>
+    <router-link :to="{name:'catalogue',params:{id:DONE_BOOKINFO.id}}" class="book-meta book-status">
+      <div class="option">
+        <div class="book-meta-l">
+          <strong class="book-spt" style="color: #444">目录</strong>
+        </div>
+        <div class="book-meta-r">
+          <p class="gray ell"></p>
+        </div>
+      </div>
+    </router-link>
+  </div>
+</div>   
 </template>
 
 <script>
@@ -56,53 +60,55 @@ export default {
   name:'book',
   data () {
     return {
-        maxHeight:5.92,
-        record:'',
+      maxHeight: 5.92,
+      record: '',
     }
   },
   methods: {
-    console(){
-        this.maxHeight == 15 ? this.maxHeight=5.92 : this.maxHeight = 15;
+    console () {
+      this.maxHeight == 15 ? this.maxHeight=5.92 : this.maxHeight = 15;
     },
-    record(){
-        if(this.DONE_ISLOGIN){
-            let arr = this.DONE_USERINFO.recently.split('#');
-            if(arr[0] == this.$route.params.id){
-                this.$router.push({
-                    name:'reader',
-                    params:{bid:arr[0],id:arr[1]}
-                })
-            }else{
-
-            }
-            
-        }
+    // record () {
+    //   if (this.DONE_ISLOGIN) {
+    //     let arr = this.DONE_USERINFO.recently.split('#');
+    //     if(arr[0] == this.$route.params.id){
+    //       this.$router.push({
+    //         name:'reader',
+    //         params:{bid:arr[0],id:arr[1]}
+    //       })
+    //     } else {}
+    //   }
+    // }
+    fetchBookInfo (bookId) {
+      this.$store.dispatch('FETCH_BOOKINFO', bookId)
     }
   },
   mounted() {
     window.scrollTo(0, 0)
+    this.fetchBookInfo(this.$route.params.id)
 	},
 	computed:{
-        tt:function(){
-            if(this.DONE_ISLOGIN){
-                let arr = this.DONE_USERINFO.recently.split('#');
-                if(arr[0] == this.$route.params.id){
-                    this.record = {
-                        name:'reader',
-                        params:{bid:arr[0],id:arr[1]}
-                    }
-                    return '继续阅读'
-                }else{
-                    this.record = '';
-                    return '暂无记录'
-                }
-
-            }else{
-                this.record = '';
-                return '请先登录'
+    ...mapGetters(['DONE_BOOKINFO']),
+    tt: function () {
+      if (this.DONE_ISLOGIN) {
+          let arr = this.DONE_USERINFO.recently.split('#');
+          if (arr[0] == this.$route.params.id) {
+            this.record = {
+              name:'reader',
+              params:{bid:arr[0],id:arr[1]}
             }
-        }
-	},
+            return '继续阅读'
+          }else{
+            this.record = '';
+            return '暂无记录'
+          }
+
+      } else {
+        this.record = '';
+        return '请先登录'
+      }
+    }
+	}
 }
 
 </script>
