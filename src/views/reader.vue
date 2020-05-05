@@ -72,7 +72,7 @@
   import {Flexbox, FlexboxItem} from 'vux'
   export default {
     name:'reader',
-    components: {Flexbox, FlexboxItem},
+    components: { Flexbox, FlexboxItem },
     data () {
       return {
         page:this.$route.params.id || 1,
@@ -89,7 +89,8 @@
       }
     },
     methods: {
-      nextPage(){
+      // 下一页
+      nextPage () {
         this.$store.dispatch('FETCH_READER',{"id":this.$route.params.bid,"p":++this.page});
         this.$store.dispatch('FETCH_RECORD',{
           "ur":`${this.$route.params.bid}#${this.page}`,
@@ -97,7 +98,8 @@
         })
         window.scrollTo(0,0)
       },
-      prevPage(){
+      // 上一页
+      prevPage () {
         if(this.page <= 1){
           return false
         }else{
@@ -109,7 +111,8 @@
           window.scrollTo(0,0)
         }
       },
-      changeMode(){
+      // 改变阅读模式
+      changeMode () {
         this.contentBox.readerMode = !this.contentBox.readerMode;
         if(this.contentBox.readerMode){
           this.contentBox.backgroundColor = '#c4b395'
@@ -120,7 +123,8 @@
         }
         this.storeOptions()
       },
-      changeBg(color){
+      // 切换背景
+      changeBg (color) {
         this.contentBox.backgroundColor = color
         this.contentBox.color = '#000'
         if(color == '#283548'){
@@ -128,43 +132,51 @@
         }
         this.storeOptions()
       },
-      changeFontSize(f){
-        if(f == 'b'){
+      // 改变字体
+      changeFontSize (f) {
+        if (f == 'b') {
           if(this.fSize > 30){return false}
           this.contentBox.fontSize =  (++this.fSize) +'px'
-        }else{
+        } else {
           if(this.fSize < 15){return false}
           this.contentBox.fontSize =  (--this.fSize) +'px'
         }
         this.storeOptions()
       },
-      storeOptions(){
+      // 保存设置
+      storeOptions () {
         window.localStorage.setItem('readerOptions',JSON.stringify(this.contentBox));
       },
-      mulu(){
+      // 目录
+      mulu () {
         let bid = this.$route.params.bid;
         this.$router.push({name:'catalogue',params:{id:bid}})
       },
-      scorllFn(){
+      scorllFn () {
         this.menuShow = false
+      },
+      getReaderData () {
+        let obj = {
+          "id":this.$route.params.bid,
+          "p":this.$route.params.id
+        }
+        console.log(obj)
+        this.$store.dispatch('FETCH_READER', { ...obj })
+      },
+      getReaderOptions () {
+        // 获取阅读模式
+        if (this.DONE_USERINFO.isLogin) {
+          this.contentBox = JSON.parse(window.localStorage.getItem('readerOptions')) || this.contentBox
+        }
       }
     },
-    created(){
-      this.$store.dispatch('FETCH_READER',{"id":this.$route.params.bid,"p":this.$route.params.id});
-      //获取阅读模式
-      if(this.DONE_ISLOGIN){
-        this.contentBox = JSON.parse(window.localStorage.getItem('readerOptions')) || this.contentBox
-      }
-
-    },
-
-    mounted(){
+    mounted () {
       window.scrollTo(0,0)
       window.addEventListener('scroll', this.scorllFn)
+      this.getReaderData()
     },
     computed:{
-      ...mapGetters(['DONE_READER','DONE_ISLOGIN','DONE_USERINFO'])
-
+      ...mapGetters(['DONE_READER', 'DONE_USERINFO'])
     }
   }
 </script>

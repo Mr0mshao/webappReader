@@ -9,8 +9,8 @@
   <div class="container">
     <group gutter='0'>
       <x-input title="手机号码" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"></x-input>
-      <x-input title="邮箱" name="email" placeholder="请输入邮箱地址" is-type="email"></x-input>
-      <x-input title="发送验证码" class="weui-vcode">
+      <!-- <x-input title="邮箱" name="email" placeholder="请输入邮箱地址" is-type="email"></x-input> -->
+      <x-input title="验&nbsp;证&nbsp;码" class="weui-vcode">
         <x-button slot="right" type="primary" mini>发送验证码</x-button>
       </x-input>
       <div class="wrapper">

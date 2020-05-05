@@ -5,8 +5,14 @@
         style="background-color:#333;"
       >
         <span>我的书城</span>
-        <router-link to="/register" slot="right">注册</router-link>
-        <router-link to="/login" slot="right">登录</router-link>
+        <template v-if="DONE_USERINFO.isLogin">
+          <router-link to="/userinfo" slot="right">张三</router-link>
+          <span slot="right" @click="handleLogout">&nbsp;| 登出</span>
+        </template>
+        <template v-else>
+          <router-link to="/register" slot="right">注册</router-link>
+          <router-link to="/login" slot="right">| 登录</router-link>
+        </template>
       </x-header>
       <transition :name="transitionName">
         <router-view />
@@ -33,6 +39,9 @@ export default {
     backToTop () {
       window.scrollTo(0,0)
       this.backBtnShow = false
+    },
+    handleLogout () {
+      this.$store.commit('TOGGLE_LOGOUT')
     }
   },
   mounted () {
@@ -45,7 +54,7 @@ export default {
     }, 500)
   },
   computed: {
-    ...mapGetters(['DONE_ISLOADING'])
+    ...mapGetters(['DONE_ISLOADING', 'DONE_USERINFO'])
   },
   watch: {
     '$route' (to, from) {

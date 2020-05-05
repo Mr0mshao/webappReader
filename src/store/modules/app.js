@@ -1,18 +1,28 @@
 const app = {
 	state: {
 		isLoading: false,
-		isLogin: false,
-		userInfo: {}
+		userInfo: {
+			isLogin: false
+		}
 	},
 	getters: {
 		'DONE_ISLOADING': state => state.isLoading,
-		'DONE_ISLOGIN': state => state.isLogin
+		'DONE_USERINFO': state => state.userInfo
 	},
 	actions : {
+		// 登陆
 		'FETCH_LOGIN' ({commit}, payload) {
 			// const { username, password } = payload
 			// axios.post('./xxxx', {...payload})
-			commit('TOGGLE_ISLOADING')
+			commit('TOGGLE_LOGIN', {...payload})
+			return Promise.resolve()
+		},
+		// 登出
+		'FETCH_LOGOUT' ({commit}) {
+			// const { username, password } = payload
+			// axios.post('./xxxx', {...payload})
+			commit('TOGGLE_LOGOUT')
+			return Promise.resolve()
 		}
 	},
 	mutations: {
@@ -20,10 +30,18 @@ const app = {
 			state.isLoading = payload
 		},
 		'TOGGLE_LOGIN' (state, payload) {
-			state.isLogin = true
 			state.userInfo = {
 				...state.userInfo,
-				...payload
+				...payload,
+				isLogin: true
+			}
+		},
+		'TOGGLE_LOGOUT' (state, payload) {
+			state.userInfo = {
+				...state.userInfo,
+				isLogin: false,
+				username: null,
+				password: null
 			}
 		}
 	}

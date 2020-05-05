@@ -30,7 +30,7 @@
               :to="record"
               class="btn-normal red" 
               style="background-color:#fff"
-            >{{tt}}</router-link>
+            >{{myLink}}</router-link>
           </li>
         </ul>
       </div>
@@ -88,20 +88,25 @@ export default {
     this.fetchBookInfo(this.$route.params.id)
 	},
 	computed:{
-    ...mapGetters(['DONE_BOOKINFO']),
-    tt: function () {
-      if (this.DONE_ISLOGIN) {
-          let arr = this.DONE_USERINFO.recently.split('#');
-          if (arr[0] == this.$route.params.id) {
-            this.record = {
-              name:'reader',
-              params:{bid:arr[0],id:arr[1]}
-            }
-            return '继续阅读'
-          }else{
-            this.record = '';
-            return '暂无记录'
-          }
+    ...mapGetters(['DONE_BOOKINFO', 'DONE_USERINFO']),
+    myLink: function () {
+      if (this.DONE_USERINFO.isLogin) {
+        //   let arr = this.DONE_USERINFO.recently.split('#');
+        //   if (arr[0] == this.$route.params.id) {
+        //     this.record = {
+        //       name:'reader',
+        //       params:{bid:arr[0],id:arr[1]}
+        //     }
+        //     return '继续阅读'
+        //   }else{
+        //     this.record = '';
+        //     return '暂无记录'
+        //   }
+        this.record = {
+          name:'reader',
+          params:{ bid: arr[0], id: arr[1] }
+        }
+        return '继续阅读'
 
       } else {
         this.record = '';

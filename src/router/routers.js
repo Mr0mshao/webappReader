@@ -38,7 +38,7 @@ export const commonRoute = [
     component: resolve => {require(['@/views/catalogue'], resolve)}
   },
   {
-    path:'/reader/:bid&:id',
+    path:'/reader/:bid/:id',
     name:'reader',
     component: resolve => {require(['@/views/reader'], resolve)}
   }
